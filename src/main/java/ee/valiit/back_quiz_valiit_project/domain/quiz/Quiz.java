@@ -4,7 +4,13 @@ import ee.valiit.back_quiz_valiit_project.domain.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.time.Instant;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "quiz")
 public class Quiz {
@@ -41,5 +47,9 @@ public class Quiz {
     @Column(name = "type", nullable = false, length = 1)
     private String type;
 
+
+    @NotNull
+    @Column(name = "\"timestamp\"", nullable = false)
+    private Instant timestamp;
 
 }
