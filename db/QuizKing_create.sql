@@ -35,6 +35,7 @@ CREATE TABLE quiz (
     public boolean  NOT NULL,
     required_count int  NOT NULL,
     type char(1)  NOT NULL,
+    timestamp timestamp  NOT NULL,
     CONSTRAINT quiz_pk PRIMARY KEY (id)
 );
 
