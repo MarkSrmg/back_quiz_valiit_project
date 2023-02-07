@@ -1,0 +1,14 @@
+{
+  "questionId": 1,
+  "questionText": "String",
+  "questionPicture": "ByteArrayToString",
+  "questionType": "M",
+  "answers": [
+    {
+      "answerId": 1,
+      "answerText": "String",
+      "answerPicture": "ByteArrayToString",
+      "isSelected": false
+    }
+  ]
+}

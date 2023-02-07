@@ -1,0 +1,16 @@
+{
+  "questionId": 1,
+  "answers": [
+    {
+      "answerId": 1,
+      "answerText": "String",
+      "answerPicture": "ByteArrayToString",
+      "isSelected": false
+    }
+  ]
+
+
+
+
+
+}
