@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
 
     @Resource
-    LoginService loginService;
+    private LoginService loginService;
 
     @GetMapping("/login")
     @Operation(summary = "This service enables user to log-in", description = "This service throws an error when incorrect credentials are provided")
