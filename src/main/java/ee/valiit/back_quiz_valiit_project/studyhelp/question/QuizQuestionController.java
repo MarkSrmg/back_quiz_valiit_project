@@ -13,7 +13,7 @@ public class QuizQuestionController {
     @Resource
     private QuizQuestionService quizQuestionService;
 
-    @PostMapping("/create/questions")
+    @PostMapping("/questions")
     @Operation(summary = "adds question to database", description = "adds question to question table in database after save button press" )
     public void addQuestion(QuestionDto questionDto) {
         quizQuestionService.addQuestion(questionDto);
