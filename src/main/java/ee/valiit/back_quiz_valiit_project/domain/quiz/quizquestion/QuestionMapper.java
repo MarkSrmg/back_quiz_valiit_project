@@ -16,7 +16,7 @@ public interface QuestionMapper {
 
     @Named("stringToByteArray")
     static byte[] stringToByteArray(String picture) {
-        if (picture == null) {
+        if (picture == null  || picture.equals("")) {
             return null;
         }
         byte[] bytes = picture.getBytes(StandardCharsets.UTF_8);

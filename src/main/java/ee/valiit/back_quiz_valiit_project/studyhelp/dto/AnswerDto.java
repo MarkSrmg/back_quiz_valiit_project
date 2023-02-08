@@ -17,12 +17,11 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AnswerDto implements Serializable {
-    private Integer id;
     @Size(max = 500)
     private String text;
     private String picture;
     @NotNull
-    private QuestionDto question;
+    private Integer questionId;
     @NotNull
     private Boolean isCorrect = false;
 }
