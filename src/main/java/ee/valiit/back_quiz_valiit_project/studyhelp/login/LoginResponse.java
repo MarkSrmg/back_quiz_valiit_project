@@ -1,4 +1,4 @@
-package ee.valiit.back_quiz_valiit_project.studyhelp;
+package ee.valiit.back_quiz_valiit_project.studyhelp.login;
 
 import lombok.Data;
 import org.springframework.stereotype.Service;
