@@ -8,16 +8,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class QuizCreateController {
+public class AllQuizController {
 
     @Resource
-    private QuizCreateService quizCreateService;
+    private AllQuizService allQuizService;
 
 
-    @PostMapping("/create")
+    @PostMapping("/quiz")
     @Operation(summary = "Create new Quiz", description = "Posts new quiz name and answers needed, and returs quizName and quizId")
     public QuizResponse addNewQuiz(@RequestBody QuizDto quizDto){
-        return quizCreateService.addNewQuiz(quizDto);
+        return allQuizService.addNewQuiz(quizDto);
     }
 
 }
