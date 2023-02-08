@@ -32,7 +32,7 @@ CREATE TABLE quiz (
     user_id int  NOT NULL,
     name varchar(255)  NOT NULL,
     status char(1)  NOT NULL,
-    public boolean  NOT NULL,
+    is_public boolean  NOT NULL,
     required_count int  NOT NULL,
     type char(1)  NOT NULL,
     timestamp timestamp  NOT NULL,

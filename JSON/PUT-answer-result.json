@@ -1,0 +1,17 @@
+{
+
+  "incorrectAnswer": true,
+    "answers": [
+    {
+      "answerId": 1,
+      "answerText": "String",
+      "answerPicture": "ByteArrayToString",
+      "isCorrect": false
+    }
+  ]
+
+
+
+
+
+}
