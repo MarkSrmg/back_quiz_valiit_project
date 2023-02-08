@@ -35,8 +35,8 @@ public class Quiz {
     private String status;
 
     @NotNull
-    @Column(name = "public", nullable = false)
-    private Boolean publicField = false;
+    @Column(name = "is_public", nullable = false)
+    private Boolean isPublic = false;
 
     @NotNull
     @Column(name = "required_count", nullable = false)
@@ -51,5 +51,7 @@ public class Quiz {
     @NotNull
     @Column(name = "\"timestamp\"", nullable = false)
     private Instant timestamp;
+
+
 
 }
