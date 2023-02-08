@@ -18,8 +18,7 @@ public interface AnswerMapper {
         if (picture == null  || picture.equals("")) {
             return null;
         }
-        byte[] bytes = picture.getBytes(StandardCharsets.UTF_8);
-        return bytes;
+        return picture.getBytes(StandardCharsets.UTF_8);
     }
 
 }
