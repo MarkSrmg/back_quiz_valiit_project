@@ -10,7 +10,8 @@ import java.time.Instant;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring", imports = {Instant.class})
 public interface QuizMapper {
 
-    @Mapping(source = "userId", target = "user.id")
+//    @Mapping(source = "userId", target = "user.id")
+    // TODO: 08.02.2023 Ei ole kindel kas on vaja pigem andmebaasist võtta siiski 
     @Mapping(source = "quizName", target = "name")
     @Mapping(source = "quizType", target = "type")
     // TODO: 08.02.2023 Vaja siia panna status constant
