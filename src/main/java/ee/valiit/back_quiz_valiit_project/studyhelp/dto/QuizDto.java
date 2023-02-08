@@ -7,7 +7,7 @@ public class QuizDto {
     private String quizName;
     private Integer requiredCount;
 
-    private Integer userId;
+//    private Integer userId;
 
     private String quizType;
 
