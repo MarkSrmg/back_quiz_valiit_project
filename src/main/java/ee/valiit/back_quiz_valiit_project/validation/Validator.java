@@ -18,11 +18,4 @@ public class Validator {
         User user = optionalUser.get();
         return user;
     }
-
-    public static Question getValidQuestion(Optional<Question> optionalQuestion) {
-        if (optionalQuestion.isEmpty()) {
-            throw new DataNotFoundException(INCORRECT_ID.getMessage(), INCORRECT_ID.getCode());
-        }
-        return optionalQuestion.get();
-    }
 }
