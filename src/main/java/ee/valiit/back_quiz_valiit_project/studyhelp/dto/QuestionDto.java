@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 @Data
 public class QuestionDto implements Serializable {
-    private Integer id;
+
     @Size(max = 500)
     @NotNull
     private String text;

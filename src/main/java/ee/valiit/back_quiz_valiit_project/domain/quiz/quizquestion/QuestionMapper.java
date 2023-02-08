@@ -16,11 +16,10 @@ public interface QuestionMapper {
 
     @Named("stringToByteArray")
     static byte[] stringToByteArray(String picture) {
-        if (picture == null  || picture.equals("")) {
+        if (picture == null || picture.equals("")) {
             return null;
         }
-        byte[] bytes = picture.getBytes(StandardCharsets.UTF_8);
-        return bytes;
+        return picture.getBytes(StandardCharsets.UTF_8);
     }
 
 }
