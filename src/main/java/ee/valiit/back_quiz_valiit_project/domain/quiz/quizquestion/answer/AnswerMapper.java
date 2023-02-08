@@ -3,13 +3,23 @@ package ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer;
 import ee.valiit.back_quiz_valiit_project.studyhelp.dto.AnswerDto;
 import org.mapstruct.*;
 
+import java.nio.charset.StandardCharsets;
+
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface AnswerMapper {
 
-    @Mapping(source = "text",target = "text")
-    @Mapping(source = "picture",target = "picture")
-    @Mapping(source = "isCorrect",target = "isCorrect")
+    @Mapping(source = "picture",target = "picture", qualifiedByName = "stringToByteArray")
+    @Mapping(source = "questionId",target = "question.id")
+
     Answer toEntity(AnswerDto answerDto);
 
+    @Named("stringToByteArray")
+    static byte[] stringToByteArray(String picture) {
+        if (picture == null  || picture.equals("")) {
+            return null;
+        }
+        byte[] bytes = picture.getBytes(StandardCharsets.UTF_8);
+        return bytes;
+    }
 
 }
