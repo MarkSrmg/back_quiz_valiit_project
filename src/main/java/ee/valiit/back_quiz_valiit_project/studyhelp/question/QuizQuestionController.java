@@ -4,7 +4,6 @@ import ee.valiit.back_quiz_valiit_project.studyhelp.dto.QuestionDto;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
