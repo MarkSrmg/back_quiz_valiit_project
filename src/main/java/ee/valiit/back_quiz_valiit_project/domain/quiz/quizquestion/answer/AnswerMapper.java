@@ -9,8 +9,6 @@ import java.nio.charset.StandardCharsets;
 public interface AnswerMapper {
 
     @Mapping(source = "picture",target = "picture", qualifiedByName = "stringToByteArray")
-    @Mapping(source = "questionId",target = "question.id")
-
     Answer toEntity(AnswerDto answerDto);
 
     @Named("stringToByteArray")

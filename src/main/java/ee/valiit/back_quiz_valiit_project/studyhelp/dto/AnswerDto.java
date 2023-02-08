@@ -21,7 +21,5 @@ public class AnswerDto implements Serializable {
     private String text;
     private String picture;
     @NotNull
-    private Integer questionId;
-    @NotNull
     private Boolean isCorrect = false;
 }
