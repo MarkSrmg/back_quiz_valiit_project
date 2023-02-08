@@ -15,7 +15,8 @@ public interface QuizMapper {
     @Mapping(source = "quizType", target = "type")
     // TODO: 08.02.2023 Vaja siia panna status constant
     @Mapping(constant = "A", target = "status")
-    @Mapping(constant = "Instant.now()", target = "timestamp")
+    @Mapping(constant = "false", target = "isPublic")
+    @Mapping(expression = "java(Instant.now())", target = "timestamp")
     Quiz toEntity(QuizDto quizDto);
 
 //    CreateQuizDto toDto(Quiz quiz);
