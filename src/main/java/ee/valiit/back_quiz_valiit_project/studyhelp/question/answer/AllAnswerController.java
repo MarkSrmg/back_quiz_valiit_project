@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class QuizAnswerController {
+public class AllAnswerController {
     @Resource
-    private QuizAnswerService quizAnswerService;
+    private AllAnswerService allAnswerService;
 
     @PostMapping("/questions/answer")
     @Operation(summary = "adds new answer to question", description = "gets questionId and adds the answer to the question to database")
     public void addAnswer(@RequestParam Integer questionId, @RequestBody AnswerDto answerDto) {
-        quizAnswerService.addAnswer(questionId, answerDto);
+        allAnswerService.addAnswer(questionId, answerDto);
 
     }
 }
