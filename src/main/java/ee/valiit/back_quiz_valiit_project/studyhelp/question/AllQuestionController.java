@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class QuizQuestionController {
+public class AllQuestionController {
 
     @Resource
-    private QuizQuestionService quizQuestionService;
+    private AllQuestionService allQuestionService;
 
     @PostMapping("/questions")
     @Operation(summary = "adds question to database", description = "adds question to question table in database after save button press" )
     public void addQuestion(@RequestBody QuestionDto questionDto) {
-        quizQuestionService.addQuestion(questionDto);
+        allQuestionService.addQuestion(questionDto);
 
     }
 

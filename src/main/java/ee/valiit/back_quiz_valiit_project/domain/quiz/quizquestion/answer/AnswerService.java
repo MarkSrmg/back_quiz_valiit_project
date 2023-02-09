@@ -1,4 +1,4 @@
-package ee.valiit.back_quiz_valiit_project.studyhelp.question.answer;
+package ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer;
 
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer.Answer;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer.AnswerRepository;
