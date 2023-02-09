@@ -11,7 +11,7 @@ import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AllQuizService {
+public class QuizzesService {
     @Resource
     private QuizService quizService;
     @Resource
