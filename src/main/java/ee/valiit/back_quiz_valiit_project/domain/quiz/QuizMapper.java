@@ -6,6 +6,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 import java.time.Instant;
+import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring", imports = {Instant.class})
 public interface QuizMapper {
@@ -22,5 +23,10 @@ public interface QuizMapper {
 
 //    CreateQuizDto toDto(Quiz quiz);
 
+
+    @Mapping(source = "user.id", target = "id")
+    Quiz toDto(Quiz quiz);
+
+    List<Quiz> toDtos(List<Quiz> quizzes);
 
 }
