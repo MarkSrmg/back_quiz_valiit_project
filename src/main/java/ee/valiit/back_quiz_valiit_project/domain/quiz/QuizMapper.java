@@ -1,6 +1,6 @@
 package ee.valiit.back_quiz_valiit_project.domain.quiz;
 
-import ee.valiit.back_quiz_valiit_project.studyhelp.dto.QuizDto;
+import ee.valiit.back_quiz_valiit_project.studyhelp.dto.QuizRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
@@ -18,7 +18,7 @@ public interface QuizMapper {
     @Mapping(constant = "A", target = "status")
     @Mapping(constant = "false", target = "isPublic")
     @Mapping(expression = "java(Instant.now())", target = "timestamp")
-    Quiz toEntity(QuizDto quizDto);
+    Quiz toEntity(QuizRequest quizRequest);
 
 //    CreateQuizDto toDto(Quiz quiz);
 
