@@ -14,4 +14,8 @@ public class CounterService {
     public void saveCorrectCount(Counter counter) {
         counterRepository.save(counter);
     }
+
+    public void saveCounter(Counter counter) {
+        counterRepository.save(counter);
+    }
 }

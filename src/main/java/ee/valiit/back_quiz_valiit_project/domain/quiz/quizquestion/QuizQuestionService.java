@@ -17,4 +17,8 @@ public class QuizQuestionService {
     public QuizQuestion findQuizQuestion(Integer quizId, Integer questionId) {
         return quizQuestionRepository.findQuizQuestion(quizId, questionId).get();
     }
+
+    public void saveQuizQuestion(QuizQuestion quizQuestion) {
+        quizQuestionRepository.save(quizQuestion);
+    }
 }

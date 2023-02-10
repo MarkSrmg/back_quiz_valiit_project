@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -15,8 +16,8 @@ public class AllQuestionController {
 
     @PostMapping("/questions")
     @Operation(summary = "adds question to database", description = "adds question to question table in database after save button press")
-    public QuestionResponse addQuestion(@RequestBody QuestionDto questionDto) {
-        return allQuestionService.addQuestion(questionDto);
+    public QuestionResponse addQuestion(@RequestParam Integer quizId, @RequestBody QuestionDto questionDto) {
+        return allQuestionService.addQuestion(quizId, questionDto);
     }
 
 }
