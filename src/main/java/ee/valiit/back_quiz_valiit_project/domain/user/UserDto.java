@@ -1,4 +1,4 @@
-package ee.valiit.back_quiz_valiit_project.domain.quiz;
+package ee.valiit.back_quiz_valiit_project.domain.user;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

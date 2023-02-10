@@ -25,16 +25,17 @@ public class QuizzesController {
 
     @GetMapping("/user")
     @Operation(summary = "Finds all personal quizzes", description = "Finds all quizzes in quiz table by userId and quiz status")
-    public List<QuizDto> findUserQuizzes(@RequestParam Integer userId) {
-        List<QuizDto> userQuizzes = quizzesService.findUserQuizzes(userId);
-        return userQuizzes;
+    public List<QuizDto> getUserQuizzes(@RequestParam Integer userId) {
+        List<QuizDto> quizzes = quizzesService.getUserQuizzes(userId);
+        return quizzes;
     }
 
 
     @GetMapping("/public")
     @Operation(summary = "Finds all public quizzes", description = "Finds all active public quizzes in quiz table")
-    public List<QuizDto> findPublicQuizzes() {
-        return null;
+    public List<QuizDto> getPublicQuizzes() {
+        List<QuizDto> quizzes = quizzesService.getPublicQuizzes();
+        return quizzes;
     }
 
 

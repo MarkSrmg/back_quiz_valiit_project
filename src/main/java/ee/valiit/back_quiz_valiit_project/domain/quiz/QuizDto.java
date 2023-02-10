@@ -16,20 +16,14 @@ import java.time.Instant;
 @AllArgsConstructor
 @NoArgsConstructor
 public class QuizDto implements Serializable {
-    private Integer id;
-    @NotNull
-    private UserDto user;
+    private Integer quizId;
+    private Integer userId;
     @Size(max = 255)
     @NotNull
-    private String name;
+    private String quizName;
     @Size(max = 1)
     @NotNull
-    private String status;
-    @NotNull
-    private Boolean isPublic = false;
-    @Size(max = 1)
-    @NotNull
-    private String type;
+    private String quizType;
     @NotNull
     private Instant timestamp;
 }

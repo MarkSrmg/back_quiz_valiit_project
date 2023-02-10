@@ -23,8 +23,7 @@ public class QuizzesService {
     private QuizRepository quizRepository;
     @Resource
     private QuizMapper quizMapper;
-    @Resource
-    private QuizDto quizDto;
+
 
     public QuizResponse addNewQuiz(Integer userId, QuizRequest quizRequest) {
         User user = userService.findUser(userId);
@@ -34,12 +33,16 @@ public class QuizzesService {
         return new QuizResponse(quiz.getId());
     }
 
-    public List<QuizDto> findUserQuizzes(Integer userId) {
-        User user = userService.findUser(userId);
-        List<Quiz> quizzes = quizRepository.findQuizzes(userId, ACTIVE);
-        return ;
-
-
-
+    public List<QuizDto> getUserQuizzes(Integer userId) {
+        List<Quiz> userQuizzes = quizService.getUserQuizzes(userId);
+        List<QuizDto> quizzes = quizMapper.toDtos(userQuizzes);
+        return quizzes;
     }
+
+    public List<QuizDto> getPublicQuizzes() {
+        List<Quiz> publicQuizzes = quizService.getPublicQuizzes();
+        List<QuizDto> quizzes = quizMapper.toDtos(publicQuizzes);
+        return quizzes;
+    }
+
 }

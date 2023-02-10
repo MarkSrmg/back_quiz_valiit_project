@@ -4,13 +4,12 @@ import ee.valiit.back_quiz_valiit_project.domain.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.Instant;
-
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "quiz")
 public class Quiz {
