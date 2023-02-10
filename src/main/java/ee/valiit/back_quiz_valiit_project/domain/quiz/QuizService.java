@@ -16,6 +16,9 @@ public class QuizService {
     public void addNewQuiz(Quiz quiz) {
         quizRepository.save(quiz);
     }
+    public Quiz findQuiz(Integer quizId){
+        return quizRepository.findById(quizId).get();
+    }
 
 
 }
