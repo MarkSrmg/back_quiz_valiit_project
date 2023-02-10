@@ -18,9 +18,9 @@ public class AllQuestionService {
     private QuestionService questionService;
 
     @Transactional
-    public void addQuestion(QuestionDto questionDto) {
+    public QuestionResponse addQuestion(QuestionDto questionDto) {
         Question question = questionMapper.toEntity(questionDto);
         questionService.saveQuestion(question);
-
+        return new QuestionResponse(question.getId());
     }
 }

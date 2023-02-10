@@ -8,7 +8,9 @@ import java.nio.charset.StandardCharsets;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface AnswerMapper {
 
-    @Mapping(source = "picture",target = "picture", qualifiedByName = "stringToByteArray")
+    @Mapping(source = "answerText",target = "text")
+    @Mapping(source = "answerPicture",target = "picture", qualifiedByName = "stringToByteArray")
+    @Mapping(source = "answerIsCorrect",target = "isCorrect")
     Answer toEntity(AnswerDto answerDto);
 
     @Named("stringToByteArray")
