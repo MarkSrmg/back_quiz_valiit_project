@@ -11,7 +11,7 @@ public class QuizQuestionService {
     @Resource
     private QuizQuestionRepository quizQuestionRepository;
 
-    public List<QuizQuestion> findAllQuestions(Quiz quiz) {
-        return quizQuestionRepository.findAllQuestions(quiz.getId());
+    public List<QuizQuestion> findAllQuestions(Integer quizId) {
+        return quizQuestionRepository.findAllQuestions(quizId);
     }
 }

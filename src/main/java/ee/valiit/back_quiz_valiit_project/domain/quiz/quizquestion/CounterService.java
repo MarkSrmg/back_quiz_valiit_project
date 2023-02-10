@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 public class CounterService {
 @Resource
     private CounterRepository counterRepository;
-    public Counter finfQuestionCount(QuizQuestion nextQuestion) {
-        return counterRepository.findQuestionCount(nextQuestion.getId()).get();
+    public Counter findQuestionCorrectCount(Integer quizQuestionId) {
+        return counterRepository.findQuestionCount(quizQuestionId).get();
     }
 }

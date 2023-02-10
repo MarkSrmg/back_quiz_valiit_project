@@ -25,24 +25,25 @@ public class PlayService {
     private QuestionMapper questionMapper;
     @Resource
     private AnswerService answerService;
-
+    @Resource
     private AnswerMapper answerMapper;
 
     public QuestionResponse findQuestion(Integer quizId) {
         Quiz quiz = quizService.findQuiz(quizId);
-        List<QuizQuestion> questions = quizQuestionService.findAllQuestions(quiz);
+        List<QuizQuestion> questions = quizQuestionService.findAllQuestions(quiz.getId());
+        // TODO: 10.02.2023 Kui 0 anna teade küsimusi pole lisatud 
         List<QuizQuestion> unansweredQuizQuestions = new ArrayList<>();
         for(QuizQuestion question : questions){
-           Counter counter = counterService.finfQuestionCount(question);
+           Counter counter = counterService.findQuestionCorrectCount(question.getId());
             if (question.getQuiz().getRequiredCount() > counter.getCorrectCount()){
                 unansweredQuizQuestions.add(question);
+                // TODO: 10.02.2023 Kui unanswered 0 siis anna teade et kõik on vastatud 
             }
         }
-
         QuizQuestion randomQuizQuestion = getRandomQuizQuestion(unansweredQuizQuestions);
         QuestionResponse questionResponse = questionMapper.toDto(randomQuizQuestion.getQuestion());
-        // TODO: 10.02.2023 Hetkel questionId tuleb null
         List<Answer> answers = answerService.findAnswers(randomQuizQuestion.getQuestion().getId());
+        // TODO: 10.02.2023 Kui 0 siis anna teade vastuseid pole lisatud 
         List<AnswerResponse> answersResponse = answerMapper.toDtos(answers);
         questionResponse.setAnswers(answersResponse);
         return questionResponse;
