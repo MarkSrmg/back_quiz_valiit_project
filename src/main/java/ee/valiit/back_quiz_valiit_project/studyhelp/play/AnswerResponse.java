@@ -7,7 +7,7 @@ public class AnswerResponse {
     private Integer answerId;
     private String answerText;
     private String answerPicture;
-    private boolean isSelected;
+    private Boolean isSelected;
 
 
 }

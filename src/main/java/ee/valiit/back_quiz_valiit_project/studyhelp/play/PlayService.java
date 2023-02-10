@@ -2,14 +2,16 @@ package ee.valiit.back_quiz_valiit_project.studyhelp.play;
 
 import ee.valiit.back_quiz_valiit_project.domain.quiz.Quiz;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.QuizService;
-import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.Counter;
-import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.CounterService;
-import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.QuizQuestion;
-import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.QuizQuestionService;
+import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.*;
+import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer.Answer;
+import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer.AnswerMapper;
+import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer.AnswerService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class PlayService {
@@ -19,15 +21,34 @@ public class PlayService {
     private QuizQuestionService quizQuestionService;
     @Resource
     private CounterService counterService;
+    @Resource
+    private QuestionMapper questionMapper;
+    @Resource
+    private AnswerService answerService;
+
+    private AnswerMapper answerMapper;
 
     public QuestionResponse findQuestion(Integer quizId) {
         Quiz quiz = quizService.findQuiz(quizId);
-        List<QuizQuestion> allQuestions = quizQuestionService.findAllQuestions(quiz);
-        for(QuizQuestion nextQuestion : allQuestions){
-           Counter counter = counterService.finfQuestionCount(nextQuestion);
-//            if (nextQuestion.getQuiz())
+        List<QuizQuestion> questions = quizQuestionService.findAllQuestions(quiz);
+        List<QuizQuestion> unansweredQuizQuestions = new ArrayList<>();
+        for(QuizQuestion question : questions){
+           Counter counter = counterService.finfQuestionCount(question);
+            if (question.getQuiz().getRequiredCount() > counter.getCorrectCount()){
+                unansweredQuizQuestions.add(question);
+            }
         }
 
-        return null;
+        QuizQuestion randomQuizQuestion = getRandomQuizQuestion(unansweredQuizQuestions);
+        QuestionResponse questionResponse = questionMapper.toDto(randomQuizQuestion.getQuestion());
+        // TODO: 10.02.2023 Hetkel questionId tuleb null
+        List<Answer> answers = answerService.findAnswers(randomQuizQuestion.getQuestion().getId());
+        List<AnswerResponse> answersResponse = answerMapper.toDtos(answers);
+        questionResponse.setAnswers(answersResponse);
+        return questionResponse;
+    }
+
+    public static QuizQuestion getRandomQuizQuestion(List<QuizQuestion> unansweredQuestions) {
+        return unansweredQuestions.get(new Random().nextInt(unansweredQuestions.size()));
     }
 }
