@@ -1,6 +1,7 @@
 package ee.valiit.back_quiz_valiit_project.domain.quiz;
 
 import ee.valiit.back_quiz_valiit_project.studyhelp.dto.QuizRequest;
+import ee.valiit.back_quiz_valiit_project.studyhelp.quiz.dto.QuizDto;
 import org.mapstruct.*;
 
 import java.time.Instant;
@@ -22,7 +23,6 @@ public interface QuizMapper {
 //    CreateQuizDto toDto(Quiz quiz);
 
 
-    @Mapping(source = "user.id", target = "userId")
     @Mapping(source = "id", target = "quizId")
     @Mapping(source = "name", target = "quizName")
     @Mapping(source = "type", target = "quizType")

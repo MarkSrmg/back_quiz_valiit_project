@@ -1,5 +1,6 @@
-package ee.valiit.back_quiz_valiit_project.domain.quiz;
+package ee.valiit.back_quiz_valiit_project.studyhelp.quiz.dto;
 
+import ee.valiit.back_quiz_valiit_project.domain.quiz.Quiz;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -17,13 +18,10 @@ import java.time.Instant;
 @NoArgsConstructor
 public class QuizDto implements Serializable {
     private Integer quizId;
-    private Integer userId;
     @Size(max = 255)
     @NotNull
     private String quizName;
     @Size(max = 1)
     @NotNull
     private String quizType;
-    @NotNull
-    private Instant timestamp;
 }
