@@ -15,8 +15,7 @@ public class AllAnswerController {
 
     @PostMapping("/questions/answer")
     @Operation(summary = "adds new answer to question", description = "gets questionId and adds the answer to the question to database")
-    public void addAnswer(@RequestParam Integer questionId, @RequestBody AnswerDto answerDto) {
-        allAnswerService.addAnswer(questionId, answerDto);
-
+    public AnswerResponse addAnswer(@RequestParam Integer questionId, @RequestBody AnswerDto answerDto) {
+        return allAnswerService.addAnswer(questionId, answerDto);
     }
 }

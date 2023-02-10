@@ -14,10 +14,9 @@ public class AllQuestionController {
     private AllQuestionService allQuestionService;
 
     @PostMapping("/questions")
-    @Operation(summary = "adds question to database", description = "adds question to question table in database after save button press" )
-    public void addQuestion(@RequestBody QuestionDto questionDto) {
-        allQuestionService.addQuestion(questionDto);
-
+    @Operation(summary = "adds question to database", description = "adds question to question table in database after save button press")
+    public QuestionResponse addQuestion(@RequestBody QuestionDto questionDto) {
+        return allQuestionService.addQuestion(questionDto);
     }
 
 }

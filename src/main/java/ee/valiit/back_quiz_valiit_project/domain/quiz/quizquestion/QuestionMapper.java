@@ -10,8 +10,8 @@ import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface QuestionMapper {
-    @Mapping(source = "text", target = "text")
-    @Mapping(source = "picture", target = "picture", qualifiedByName = "stringToByteArray")
+    @Mapping(source = "questionText", target = "text")
+    @Mapping(source = "questionPicture", target = "picture", qualifiedByName = "stringToByteArray")
     @Mapping(constant = "F", target = "type")
     Question toEntity(QuestionDto questionDto);
 

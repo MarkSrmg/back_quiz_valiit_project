@@ -14,9 +14,9 @@ public class QuestionDto implements Serializable {
 
     @Size(max = 500)
     @NotNull
-    private String text;
-    private String picture;
+    private String questionText;
+    private String questionPicture;
     @Size(max = 1)
     @NotNull
-    private String type;
+    private String questionType;
 }

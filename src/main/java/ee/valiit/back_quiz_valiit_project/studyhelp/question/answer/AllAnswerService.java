@@ -18,10 +18,11 @@ public class AllAnswerService {
     @Resource
     private AnswerMapper answerMapper;
 
-    public void addAnswer(Integer questionId, AnswerDto answerDto) {
+    public AnswerResponse addAnswer(Integer questionId, AnswerDto answerDto) {
         Question question = questionService.findQuestion(questionId);
         Answer answer = answerMapper.toEntity(answerDto);
         answer.setQuestion(question);
         answerService.saveAnswer(answer);
+        return new AnswerResponse(answer.getId());
     }
 }
