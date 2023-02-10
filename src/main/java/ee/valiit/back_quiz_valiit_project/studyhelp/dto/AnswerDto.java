@@ -20,5 +20,5 @@ public class AnswerDto implements Serializable {
     private String answerText;
     private String answerPicture;
     @NotNull
-    private Boolean answerIsCorrect = false;
+    private Boolean answerIsCorrect = true;
 }
