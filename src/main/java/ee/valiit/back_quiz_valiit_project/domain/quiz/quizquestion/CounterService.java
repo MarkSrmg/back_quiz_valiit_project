@@ -10,4 +10,8 @@ public class CounterService {
     public Counter findQuestionCorrectCount(Integer quizQuestionId) {
         return counterRepository.findQuestionCount(quizQuestionId).get();
     }
+
+    public void saveCorrectCount(Counter counter) {
+        counterRepository.save(counter);
+    }
 }

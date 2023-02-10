@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,4 +23,10 @@ public class PlayController {
     public QuestionResponse findQuiestion(@RequestParam Integer quizId) {
         return playService.findQuestion(quizId);
     }
+    @PutMapping("/play")
+    @Operation(summary = "increases Correct Question Count")
+    public void increaseQuestionCorrectCount(@RequestParam Integer quizId, @RequestParam Integer questionId){
+        playService.increaseQuestionCorrectCount(quizId, questionId);
+    }
+
 }

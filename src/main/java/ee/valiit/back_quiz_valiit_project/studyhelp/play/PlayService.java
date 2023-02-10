@@ -27,6 +27,11 @@ public class PlayService {
     private AnswerService answerService;
     @Resource
     private AnswerMapper answerMapper;
+    private final CounterRepository counterRepository;
+
+    public PlayService(CounterRepository counterRepository) {
+        this.counterRepository = counterRepository;
+    }
 
     public QuestionResponse findQuestion(Integer quizId) {
         Quiz quiz = quizService.findQuiz(quizId);
@@ -51,5 +56,12 @@ public class PlayService {
 
     public static QuizQuestion getRandomQuizQuestion(List<QuizQuestion> unansweredQuestions) {
         return unansweredQuestions.get(new Random().nextInt(unansweredQuestions.size()));
+    }
+
+    public void increaseQuestionCorrectCount(Integer quizId, Integer questionId) {
+       QuizQuestion quizQuestion = quizQuestionService.findQuizQuestion(quizId, questionId);
+        Counter counter = counterService.findQuestionCorrectCount(quizQuestion.getId());
+        counter.setCorrectCount(counter.getCorrectCount()+1);
+        counterService.saveCorrectCount(counter);
     }
 }
