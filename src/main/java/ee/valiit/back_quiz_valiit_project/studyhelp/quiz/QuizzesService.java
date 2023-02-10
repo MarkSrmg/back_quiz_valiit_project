@@ -2,16 +2,15 @@ package ee.valiit.back_quiz_valiit_project.studyhelp.quiz;
 
 
 import ee.valiit.back_quiz_valiit_project.domain.quiz.*;
-import ee.valiit.back_quiz_valiit_project.domain.user.Status;
 import ee.valiit.back_quiz_valiit_project.domain.user.User;
 import ee.valiit.back_quiz_valiit_project.domain.user.UserService;
 import ee.valiit.back_quiz_valiit_project.studyhelp.dto.QuizRequest;
+import ee.valiit.back_quiz_valiit_project.studyhelp.quiz.dto.QuizDto;
+import ee.valiit.back_quiz_valiit_project.studyhelp.quiz.dto.QuizResponse;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-import static ee.valiit.back_quiz_valiit_project.domain.user.Status.ACTIVE;
 
 @Service
 public class QuizzesService {
