@@ -6,6 +6,7 @@ import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.*;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer.Answer;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer.AnswerMapper;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer.AnswerService;
+import ee.valiit.back_quiz_valiit_project.studyhelp.Status;
 import ee.valiit.back_quiz_valiit_project.validation.Validator;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,7 @@ public class PlayService {
 
     public QuestionResponse findQuestion(Integer quizId) {
         Quiz quiz = quizService.findQuiz(quizId);
-        List<QuizQuestion> questions = quizQuestionService.findAllQuestions(quiz.getId());
+        List<QuizQuestion> questions = quizQuestionService.findAllActiveQuizQuestions(quiz.getId(), Status.ACTIVE);
         // TODO: 10.02.2023 Kui 0 anna teade küsimusi pole lisatud 
         List<QuizQuestion> unansweredQuizQuestions = new ArrayList<>();
         for(QuizQuestion question : questions){

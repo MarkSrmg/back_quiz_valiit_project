@@ -3,6 +3,7 @@ package ee.valiit.back_quiz_valiit_project.studyhelp.question;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.Quiz;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.QuizService;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.*;
+import ee.valiit.back_quiz_valiit_project.studyhelp.Status;
 import ee.valiit.back_quiz_valiit_project.studyhelp.dto.QuestionDto;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -38,7 +39,7 @@ public class AllQuestionService {
         QuizQuestion quizQuestion = new QuizQuestion();
         quizQuestion.setQuiz(quiz);
         quizQuestion.setQuestion(question);
-        quizQuestion.setStatus("A");
+        quizQuestion.setStatus(Status.ACTIVE);
         quizQuestion.setTimestamp(Instant.now());
         quizQuestionService.saveQuizQuestion(quizQuestion);
         Counter counter = new Counter();
