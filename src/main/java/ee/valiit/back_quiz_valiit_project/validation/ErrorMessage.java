@@ -6,6 +6,7 @@ import lombok.Getter;
 public enum ErrorMessage {
 
     INCORRECT_CREDENTIALS("Wrong username or password", "666"),
+    NO_QUESTIONS_TO_ANSWER("All questions are answered", "404"),
     INCORRECT_ID ("Id not found", "777");
 
     private String message;

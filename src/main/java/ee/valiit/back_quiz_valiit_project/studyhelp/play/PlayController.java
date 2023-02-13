@@ -20,6 +20,7 @@ public class PlayController {
 
     @GetMapping("/play")
     @Operation(summary = "finds a question and answers to play", description = "finds all questions from quiz id where correct count is lower than required count and responds with a random one from the list")
+    @ApiResponses(value = {@ApiResponse(responseCode = "404", description = "All questions are answered", content = @Content(schema = @Schema(implementation = ApiError.class)))})
     public QuestionResponse findQuiestion(@RequestParam Integer quizId) {
         return playService.findQuestion(quizId);
     }

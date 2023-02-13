@@ -6,6 +6,7 @@ import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.*;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer.Answer;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer.AnswerMapper;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer.AnswerService;
+import ee.valiit.back_quiz_valiit_project.validation.Validator;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -45,10 +46,11 @@ public class PlayService {
                 // TODO: 10.02.2023 Kui unanswered 0 siis anna teade et kõik on vastatud 
             }
         }
-        QuizQuestion randomQuizQuestion = getRandomQuizQuestion(unansweredQuizQuestions);
+        List<QuizQuestion> validUnasnweredQuizQuestions = Validator.getValidUnasnweredQuizQuestions(unansweredQuizQuestions);
+        QuizQuestion randomQuizQuestion = getRandomQuizQuestion(validUnasnweredQuizQuestions);
         QuestionResponse questionResponse = questionMapper.toDto(randomQuizQuestion.getQuestion());
         List<Answer> answers = answerService.findAnswers(randomQuizQuestion.getQuestion().getId());
-        // TODO: 10.02.2023 Kui 0 siis anna teade vastuseid pole lisatud 
+        // TODO: 10.02.2023 Kui 0 siis anna teade vastuseid pole lisatud
         List<AnswerResponse> answersResponse = answerMapper.toDtos(answers);
         questionResponse.setAnswers(answersResponse);
         return questionResponse;
