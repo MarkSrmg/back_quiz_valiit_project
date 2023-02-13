@@ -56,7 +56,7 @@ public class QuizzesService {
 
     public void resetCounter(Integer quizId) {
         Quiz quiz = quizService.findQuiz(quizId);
-        List<QuizQuestion> quizQuestions = quizQuestionService.findAllQuestions(quizId);
+        List<QuizQuestion> quizQuestions = quizQuestionService.findAllQuestions(quiz.getId());
         for (QuizQuestion quizQuestion : quizQuestions) {
             Counter count = counterService.findQuestionCorrectCount(quizQuestion.getId());
             count.setCorrectCount(0);
