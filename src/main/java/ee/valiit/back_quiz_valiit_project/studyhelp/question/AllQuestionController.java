@@ -1,8 +1,11 @@
 package ee.valiit.back_quiz_valiit_project.studyhelp.question;
 
+import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.Question;
 import ee.valiit.back_quiz_valiit_project.studyhelp.dto.QuestionDto;
+import ee.valiit.back_quiz_valiit_project.util.PictureUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
+import org.mapstruct.Mapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
