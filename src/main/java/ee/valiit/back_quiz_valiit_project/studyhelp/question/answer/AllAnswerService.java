@@ -9,6 +9,8 @@ import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.QuestionServi
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AllAnswerService {
     @Resource
@@ -24,5 +26,12 @@ public class AllAnswerService {
         answer.setQuestion(question);
         answerService.saveAnswer(answer);
         return new AnswerResponse(answer.getId());
+    }
+
+
+    public void editAnswer(Integer answerId, AnswerDto answerDto) {
+        Answer answer = answerService.findAnswer(answerId);
+        Answer updateAnswer = answerMapper.updateAnswer(answerDto, answer);
+        answerService.saveAnswer(updateAnswer);
     }
 }

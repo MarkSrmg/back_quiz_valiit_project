@@ -20,7 +20,7 @@ public class AllQuestionController {
         return allQuestionService.addQuestion(quizId, questionDto);
     }
     @PutMapping("/questions")
-    @Operation(summary = "adds question to database", description = "adds question to question table in database after save button press")
+    @Operation(summary = "Edits question in database", description = "Finds question via Id and adds changes to question table in database after edit button press")
     public void editQuestion(@RequestParam Integer questionId, @RequestBody QuestionDto questionDto) {
         allQuestionService.editQuestion(questionId, questionDto);
     }

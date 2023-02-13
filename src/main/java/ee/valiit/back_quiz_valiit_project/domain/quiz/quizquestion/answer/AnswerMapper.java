@@ -38,4 +38,8 @@ public interface AnswerMapper {
     }
 
     List<AnswerResponse> toDtos(List<Answer> answers);
+
+    @InheritConfiguration (name = "toEntity")
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    Answer updateAnswer(AnswerDto answerDto, @MappingTarget Answer answer);
 }

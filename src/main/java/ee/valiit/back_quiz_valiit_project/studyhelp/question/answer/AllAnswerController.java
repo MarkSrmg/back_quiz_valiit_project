@@ -1,12 +1,10 @@
 package ee.valiit.back_quiz_valiit_project.studyhelp.question.answer;
 
 import ee.valiit.back_quiz_valiit_project.studyhelp.dto.AnswerDto;
+import ee.valiit.back_quiz_valiit_project.studyhelp.dto.QuestionDto;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class AllAnswerController {
@@ -17,5 +15,10 @@ public class AllAnswerController {
     @Operation(summary = "adds new answer to question", description = "gets questionId and adds the answer to the question to database")
     public AnswerResponse addAnswer(@RequestParam Integer questionId, @RequestBody AnswerDto answerDto) {
         return allAnswerService.addAnswer(questionId, answerDto);
+    }
+    @PutMapping("/questions/answer")
+    @Operation(summary = "Edits question in database", description = "Finds question via Id and adds changes to question table in database after edit button press")
+    public void editAnswer(@RequestParam Integer answerId, @RequestBody AnswerDto answerDto) {
+        allAnswerService.editAnswer(answerId, answerDto);
     }
 }
