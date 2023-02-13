@@ -13,6 +13,14 @@ public interface QuizQuestionRepository extends JpaRepository<QuizQuestion, Inte
     @Query("select q from QuizQuestion q where q.quiz.id = ?1 and q.question.id = ?2")
     Optional<QuizQuestion> findQuizQuestion(Integer id, Integer id1);
 
+    @Query("select q from QuizQuestion q where q.quiz.id = ?1 and q.status = ?2")
+    List<QuizQuestion> findAllActiveQuizQuestions(Integer id, String status);
+
+
+
+
+
+
 
 
 }
