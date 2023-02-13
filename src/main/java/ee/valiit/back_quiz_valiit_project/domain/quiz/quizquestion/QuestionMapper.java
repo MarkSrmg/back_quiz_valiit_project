@@ -3,12 +3,13 @@ package ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion;
 import ee.valiit.back_quiz_valiit_project.studyhelp.dto.QuestionDto;
 
 import ee.valiit.back_quiz_valiit_project.studyhelp.play.QuestionResponse;
+import ee.valiit.back_quiz_valiit_project.util.PictureUtil;
 import org.mapstruct.*;
 
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
+
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring", imports = {PictureUtil.class})
 public interface QuestionMapper {
     @Mapping(source = "questionText", target = "text")
     @Mapping(source = "questionPicture", target = "picture", qualifiedByName = "stringToByteArray")
@@ -27,16 +28,19 @@ public interface QuestionMapper {
     @Mapping(source = "id", target = "questionId")
     @Mapping(source = "text", target = "questionText")
     // TODO: 09.02.2023 ByteA to string
-    @Mapping(source = "picture", target = "questionPicture", qualifiedByName = "byteArrayToString")
+    @Mapping(expression = "java(PictureUtil.byteArrayToString(randomQuestion.getPicture()))", target = "questionPicture")
     @Mapping(source = "type", target = "questionType")
     QuestionResponse toDto(Question randomQuestion);
 
-    @Named("byteArrayToString")
-    static String byteArrayToString(byte[] picture){
-        if (picture == null){
-            return null;
-        }
-        return picture.toString();
-    }
+//    @Named("byteArrayToString")
+//    static String byteArrayToString(byte[] picture){
+//        if (picture == null){
+//            return null;
+//        }
+//        return new String(picture);
+//    }
 
+    @InheritConfiguration (name = "toEntity")
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    Question updateQuestion(QuestionDto questionDto, @MappingTarget Question question);
 }
