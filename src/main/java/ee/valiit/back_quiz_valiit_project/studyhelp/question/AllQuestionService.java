@@ -46,4 +46,10 @@ public class AllQuestionService {
         counter.setCorrectCount(0);
         counterService.saveCounter(counter);
     }
+
+    public void editQuestion(Integer questionId, QuestionDto questionDto) {
+        Question question = questionService.findQuestion(questionId);
+        questionMapper.updateQuestion(questionDto, question);
+        questionService.saveQuestion(question);
+    }
 }

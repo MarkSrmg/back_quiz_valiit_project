@@ -40,4 +40,7 @@ public interface QuestionMapper {
 //        return new String(picture);
 //    }
 
+    @InheritConfiguration (name = "toEntity")
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    Question updateQuestion(QuestionDto questionDto, @MappingTarget Question question);
 }
