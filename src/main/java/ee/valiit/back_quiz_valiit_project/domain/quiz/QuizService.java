@@ -33,4 +33,6 @@ public class QuizService {
         List<Quiz> publicQuizzes = quizRepository.findQuizzes(ACTIVE, true);
         return publicQuizzes;
     }
+
+
 }

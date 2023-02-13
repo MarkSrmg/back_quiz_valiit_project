@@ -23,6 +23,12 @@ public class QuizzesController {
         return quizzesService.addNewQuiz(userId, quizRequest);
     }
 
+    @PutMapping()
+    @Operation(summary = "Reset a counter value to zero upon refresh ", description = "Finds all questions by quiz ID and resets their counters to zero in 'counter' table")
+    public void resetCounter(@RequestParam Integer quizId) {
+        quizzesService.resetCounter(quizId);
+    }
+
 
     @GetMapping("/user")
     @Operation(summary = "Finds all personal quizzes", description = "Finds all active quizzes in quiz table by userId")
