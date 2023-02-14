@@ -28,6 +28,7 @@ public interface AnswerMapper {
     @Mapping(source = "text", target = "answerText")
     @Mapping(expression = "java(PictureUtil.byteArrayToString(answer.getPicture()))", target = "answerPicture")
     @Mapping(constant = "false", target = "isSelected")
+    @Mapping(source = "isCorrect", target = "isCorrect")
     AnswerResponse toDto(Answer answer);
 
 

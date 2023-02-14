@@ -9,5 +9,7 @@ public class AnswerResponse {
     private String answerPicture;
     private Boolean isSelected;
 
+    private Boolean isCorrect;
+
 
 }
