@@ -29,7 +29,6 @@ public class QuizzesController {
         quizzesService.resetCounter(quizId);
     }
 
-
     @GetMapping("/user")
     @Operation(summary = "Finds all personal quizzes", description = "Finds all active quizzes in quiz table by userId")
     public List<QuizDto> getUserQuizzes(@RequestParam Integer userId) {
@@ -37,13 +36,16 @@ public class QuizzesController {
         return quizzes;
     }
 
-
     @GetMapping("/public")
     @Operation(summary = "Finds all public quizzes", description = "Finds all active public quizzes in quiz table")
     public List<QuizDto> getPublicQuizzes() {
         List<QuizDto> quizzes = quizzesService.getPublicQuizzes();
         return quizzes;
     }
-
+    @DeleteMapping()
+    @Operation(summary = "Deletes Quiz", description = "Finds quiz by quizId, adds timestamp to name and sets status to deactivated")
+    public void deleteQuiz(@RequestParam Integer quizId) {
+        quizzesService.deleteQuiz(quizId);
+    }
 
 }

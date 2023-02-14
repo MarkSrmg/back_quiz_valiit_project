@@ -14,8 +14,11 @@ import ee.valiit.back_quiz_valiit_project.studyhelp.quiz.dto.QuizResponse;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import static ee.valiit.back_quiz_valiit_project.studyhelp.Status.DEACTIVATED;
 
 @Service
 public class QuizzesService {
@@ -29,7 +32,6 @@ public class QuizzesService {
     private QuizMapper quizMapper;
     @Resource
     private CounterService counterService;
-
     @Resource
     private QuizQuestionService quizQuestionService;
 
@@ -64,5 +66,14 @@ public class QuizzesService {
 
         }
 
+    }
+
+    public void deleteQuiz(Integer quizId) {
+        Quiz quiz = quizService.findQuiz(quizId);
+        String currentName = quiz.getName();
+        String newName = currentName + " (Deactivated: " + LocalDateTime.now() + ") ";
+        quiz.setName(newName);
+        quiz.setStatus(DEACTIVATED);
+        quizService.saveQuiz(quiz);
     }
 }
