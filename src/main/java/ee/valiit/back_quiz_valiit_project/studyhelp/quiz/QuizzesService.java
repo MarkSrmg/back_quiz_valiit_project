@@ -14,7 +14,6 @@ import ee.valiit.back_quiz_valiit_project.studyhelp.quiz.dto.QuizResponse;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -42,16 +41,24 @@ public class QuizzesService {
         return new QuizResponse(quiz.getId());
     }
 
+    public List<QuizDto> getUserLast5Quizzes(Integer userId) {
+        List<Quiz> quizzes = quizService.getUserLast5Quizzes(userId);
+        return quizMapper.toDtos(quizzes);
+    }
+
     public List<QuizDto> getUserQuizzes(Integer userId) {
-        List<Quiz> userQuizzes = quizService.getUserQuizzes(userId);
-        List<QuizDto> quizzes = quizMapper.toDtos(userQuizzes);
-        return quizzes;
+        List<Quiz> quizzes = quizService.getUserQuizzes(userId);
+        return quizMapper.toDtos(quizzes);
+    }
+
+    public List<QuizDto> getPublicLast5Quizzes() {
+        List<Quiz> quizzes = quizService.getPublicLast5Quizzes();
+        return quizMapper.toDtos(quizzes);
     }
 
     public List<QuizDto> getPublicQuizzes() {
-        List<Quiz> publicQuizzes = quizService.getPublicQuizzes();
-        List<QuizDto> quizzes = quizMapper.toDtos(publicQuizzes);
-        return quizzes;
+        List<Quiz> quizzes = quizService.getPublicQuizzes();
+        return quizMapper.toDtos(quizzes);
     }
 
     public void resetCounter(Integer quizId) {
@@ -66,3 +73,6 @@ public class QuizzesService {
 
     }
 }
+
+
+
