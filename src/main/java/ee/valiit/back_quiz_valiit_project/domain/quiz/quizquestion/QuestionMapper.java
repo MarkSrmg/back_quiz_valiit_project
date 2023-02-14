@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 public interface QuestionMapper {
     @Mapping(source = "questionText", target = "text")
     @Mapping(source = "questionPicture", target = "picture", qualifiedByName = "stringToByteArray")
-    @Mapping(constant = "F", target = "type")
+    @Mapping(source = "questionType", target = "type")
     Question toEntity(QuestionDto questionDto);
 
 
