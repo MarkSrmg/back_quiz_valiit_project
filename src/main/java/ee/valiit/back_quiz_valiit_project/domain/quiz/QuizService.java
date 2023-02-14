@@ -1,8 +1,6 @@
 package ee.valiit.back_quiz_valiit_project.domain.quiz;
 
-import ee.valiit.back_quiz_valiit_project.domain.user.Status;
 import jakarta.annotation.Resource;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,14 +22,19 @@ public class QuizService {
     }
 
 
-    public List<Quiz> getUserQuizzes(Integer userId) {
-        List<Quiz> userQuizzes = quizRepository.findQuizzes(userId, ACTIVE);
-        return userQuizzes;
+    public List<Quiz> getUserLast5Quizzes(Integer userId) {
+        return quizRepository.findUserQuizzesLast5(userId, ACTIVE);
     }
 
+    public List<Quiz> getUserQuizzes(Integer userId) {
+        return quizRepository.findUserQuizzes(userId, ACTIVE);
+    }
+
+    public List<Quiz> getPublicLast5Quizzes() {
+        return quizRepository.findPublicQuizzesLast5(ACTIVE, true);
+    }
     public List<Quiz> getPublicQuizzes() {
-        List<Quiz> publicQuizzes = quizRepository.findQuizzes(ACTIVE, true);
-        return publicQuizzes;
+        return quizRepository.findPublicQuizzes(ACTIVE, true);
     }
 
     public void saveQuiz(Quiz quiz) {

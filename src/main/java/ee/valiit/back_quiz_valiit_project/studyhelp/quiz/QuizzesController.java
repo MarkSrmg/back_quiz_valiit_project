@@ -29,18 +29,27 @@ public class QuizzesController {
         quizzesService.resetCounter(quizId);
     }
 
+    @GetMapping("/user/last-5")
+    @Operation(summary = "Finds last 5 personal quizzes", description = "Finds last 5 active quizzes in quiz table by userId")
+    public List<QuizDto> getUserLast5Quizzes(@RequestParam Integer userId) {
+        return quizzesService.getUserLast5Quizzes(userId);
+    }
     @GetMapping("/user")
     @Operation(summary = "Finds all personal quizzes", description = "Finds all active quizzes in quiz table by userId")
     public List<QuizDto> getUserQuizzes(@RequestParam Integer userId) {
-        List<QuizDto> quizzes = quizzesService.getUserQuizzes(userId);
-        return quizzes;
+        return quizzesService.getUserQuizzes(userId);
+    }
+
+    @GetMapping("/public/last-5")
+    @Operation(summary = "Finds last 5 public quizzes", description = "Finds last 5 active public quizzes in quiz table")
+    public List<QuizDto> getPublicLast5Quizzes() {
+        return quizzesService.getPublicLast5Quizzes();
     }
 
     @GetMapping("/public")
     @Operation(summary = "Finds all public quizzes", description = "Finds all active public quizzes in quiz table")
     public List<QuizDto> getPublicQuizzes() {
-        List<QuizDto> quizzes = quizzesService.getPublicQuizzes();
-        return quizzes;
+        return quizzesService.getPublicQuizzes();
     }
     @DeleteMapping()
     @Operation(summary = "Deletes Quiz", description = "Finds quiz by quizId, adds timestamp to name and sets status to deactivated")
