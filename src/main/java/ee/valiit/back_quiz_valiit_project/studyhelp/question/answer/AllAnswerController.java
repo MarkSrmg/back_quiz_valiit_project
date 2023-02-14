@@ -21,4 +21,5 @@ public class AllAnswerController {
     public void editAnswer(@RequestParam Integer answerId, @RequestBody AnswerDto answerDto) {
         allAnswerService.editAnswer(answerId, answerDto);
     }
+
 }
