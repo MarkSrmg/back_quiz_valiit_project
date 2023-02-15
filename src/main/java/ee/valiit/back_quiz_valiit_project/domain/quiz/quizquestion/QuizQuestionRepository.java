@@ -1,5 +1,6 @@
 package ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion;
 
+import ee.valiit.back_quiz_valiit_project.domain.quiz.Quiz;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -15,6 +16,9 @@ public interface QuizQuestionRepository extends JpaRepository<QuizQuestion, Inte
 
     @Query("select q from QuizQuestion q where q.quiz.id = ?1 and q.status = ?2")
     List<QuizQuestion> findAllActiveQuizQuestions(Integer id, String status);
+
+    @Query("select q from QuizQuestion q where q.quiz = ?1")
+    List<QuizQuestion> findQuizQuestions(Quiz quiz);
 
 
 

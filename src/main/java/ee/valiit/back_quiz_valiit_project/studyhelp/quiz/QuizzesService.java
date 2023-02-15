@@ -1,7 +1,10 @@
 package ee.valiit.back_quiz_valiit_project.studyhelp.quiz;
 
 
-import ee.valiit.back_quiz_valiit_project.domain.quiz.*;
+import ee.valiit.back_quiz_valiit_project.domain.quiz.Quiz;
+import ee.valiit.back_quiz_valiit_project.domain.quiz.QuizMapper;
+import ee.valiit.back_quiz_valiit_project.domain.quiz.QuizRepository;
+import ee.valiit.back_quiz_valiit_project.domain.quiz.QuizService;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.Counter;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.CounterService;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.QuizQuestion;
@@ -14,20 +17,20 @@ import ee.valiit.back_quiz_valiit_project.studyhelp.quiz.dto.QuizResponse;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
+import static ee.valiit.back_quiz_valiit_project.studyhelp.Status.ACTIVE;
 import static ee.valiit.back_quiz_valiit_project.studyhelp.Status.DEACTIVATED;
 
 @Service
 public class QuizzesService {
+    public static final int DEFAULT_REQUIRED_COUNT = 1;
     @Resource
     private QuizService quizService;
     @Resource
     private UserService userService;
-    @Resource
-    private QuizRepository quizRepository;
     @Resource
     private QuizMapper quizMapper;
     @Resource
@@ -83,5 +86,67 @@ public class QuizzesService {
         quiz.setName(newName);
         quiz.setStatus(DEACTIVATED);
         quizService.saveQuiz(quiz);
+    }
+
+    public void copyPublicQuizToUser(Integer quizId, Integer userId) {
+        Quiz publicQuiz = quizService.findQuiz(quizId);
+        
+        Quiz userQuiz = createAndSaveUserQuiz(userId, publicQuiz);
+        // TODO: kasutades "publicQuiz" objekti leiame andmebaasist "publicQuizQuestions" listi (quizQuestionService-> quizQuestionRepository)
+
+        // TODO: teeme publicu "publicQuizQuestions" listist for tsykkli - ja nimetame tsykli yksik objekti nimeks "publicQuizQuestion"
+        // TODO: tsykkli sees teeme:
+
+                // TODO: publicQuizQuestion.getQuestoniga() saame kätte Question tüüpi objekti "publicQuestion"
+
+
+                // TODO: teeme juurde yhe uue (new Question) tüüpi objekti "userQuestion" (uus rida)
+
+                // TODO:  täidame setteritega ära "userQuestion" andmed (info saab "publicQuestion" objektist getteritega)
+
+                // TODO: salvestame andmebaasi "userQuestion" rea (questionService-> questionRepository)
+
+
+                // TODO: teeme juurde yhe uue (new QuizQuestion) tüüpi objekti "userQuizQuestion" (uus rida)
+
+                // TODO:  täidame setteritega ära "userQuizQuestion" andmed (info saab "publicQuizQuestion" objektist getteritega)
+
+                // TODO: salvestame andmebaasi "userQuizQuestion" rea (quizQuestionService-> quizQuestionRepository)
+
+                // TODO: kasutades "publicQuestion" objekti leiame andmebaasist "publicAnswers" listi (answerService-> answerRepository)
+
+                // TODO: teeme publicu "publicAnswers" listist for tsykkli - ja nimetame tsykli yksik objekti nimeks "publicAnswer"
+                // TODO: tsykkli sees teeme:
+
+                        // TODO: teeme juurde yhe uue (new Answer) tüüpi objekti "userAnswer" (uus rida)
+
+                        // TODO:  täidame setteritega ära "userAnswer" andmed (info saab "publicAnswer" objektist getteritega)
+
+                        // TODO: salvestame andmebaasi "userAnswer" rea (answerService-> answerRepository)
+
+        // TODO: THE END - JUHUUUUUU!!! :)
+
+
+
+
+    }
+
+    private Quiz createAndSaveUserQuiz(Integer userId, Quiz publicQuiz) {
+        User user = userService.findUser(userId);
+        Quiz userQuiz = createUserQuiz(publicQuiz, user);
+        quizService.saveQuiz(userQuiz);
+        return userQuiz;
+    }
+
+    private static Quiz createUserQuiz(Quiz publicQuiz, User user) {
+        Quiz userQuiz = new Quiz();
+        userQuiz.setUser(user);
+        userQuiz.setName(publicQuiz.getName());
+        userQuiz.setType(publicQuiz.getType());
+        userQuiz.setTimestamp(Instant.now());
+        userQuiz.setIsPublic(false);
+        userQuiz.setStatus(ACTIVE);
+        userQuiz.setRequiredCount(DEFAULT_REQUIRED_COUNT);
+        return userQuiz;
     }
 }

@@ -21,7 +21,6 @@ public class QuizService {
         return quizRepository.findById(quizId).get();
     }
 
-
     public List<Quiz> getUserLast5Quizzes(Integer userId) {
         return quizRepository.findUserQuizzesLast5(userId, ACTIVE);
     }
@@ -41,3 +40,4 @@ public class QuizService {
         quizRepository.save(quiz);
     }
 }
+
