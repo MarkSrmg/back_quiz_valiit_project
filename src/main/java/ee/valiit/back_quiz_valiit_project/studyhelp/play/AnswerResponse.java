@@ -11,5 +11,7 @@ public class AnswerResponse {
 
     private Boolean isCorrect;
 
+    private String isAnswered;
+
 
 }
