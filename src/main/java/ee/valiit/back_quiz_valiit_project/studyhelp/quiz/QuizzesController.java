@@ -63,7 +63,6 @@ public class QuizzesController {
     @Operation(summary = "Creates copy of public quiz", description = "Enables user to add public quiz to own quizzes")
     public void copyPublicQuizToUser(@RequestParam Integer quizId, @RequestParam Integer userId) {
         quizzesService.copyPublicQuizToUser(quizId, userId);
-
     }
 }
 

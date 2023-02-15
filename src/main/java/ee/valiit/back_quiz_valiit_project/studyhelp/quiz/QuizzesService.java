@@ -5,10 +5,9 @@ import ee.valiit.back_quiz_valiit_project.domain.quiz.Quiz;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.QuizMapper;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.QuizRepository;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.QuizService;
-import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.Counter;
-import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.CounterService;
-import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.QuizQuestion;
-import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.QuizQuestionService;
+import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.*;
+import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer.Answer;
+import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer.AnswerService;
 import ee.valiit.back_quiz_valiit_project.domain.user.User;
 import ee.valiit.back_quiz_valiit_project.domain.user.UserService;
 import ee.valiit.back_quiz_valiit_project.studyhelp.dto.QuizRequest;
@@ -37,6 +36,16 @@ public class QuizzesService {
     private CounterService counterService;
     @Resource
     private QuizQuestionService quizQuestionService;
+    @Resource
+    private QuestionService questionService;
+    @Resource
+    private AnswerService answerService;
+    private final QuestionRepository questionRepository;
+
+
+    public QuizzesService(QuestionRepository questionRepository) {
+        this.questionRepository = questionRepository;
+    }
 
 
     public QuizResponse addNewQuiz(Integer userId, QuizRequest quizRequest) {
@@ -90,44 +99,32 @@ public class QuizzesService {
 
     public void copyPublicQuizToUser(Integer quizId, Integer userId) {
         Quiz publicQuiz = quizService.findQuiz(quizId);
-        
         Quiz userQuiz = createAndSaveUserQuiz(userId, publicQuiz);
-        // TODO: kasutades "publicQuiz" objekti leiame andmebaasist "publicQuizQuestions" listi (quizQuestionService-> quizQuestionRepository)
+        List<QuizQuestion> publicQuizQuestions = quizQuestionService.findAllQuestions(publicQuiz.getId());
 
-        // TODO: teeme publicu "publicQuizQuestions" listist for tsykkli - ja nimetame tsykli yksik objekti nimeks "publicQuizQuestion"
-        // TODO: tsykkli sees teeme:
-
-                // TODO: publicQuizQuestion.getQuestoniga() saame kätte Question tüüpi objekti "publicQuestion"
-
-
-                // TODO: teeme juurde yhe uue (new Question) tüüpi objekti "userQuestion" (uus rida)
-
-                // TODO:  täidame setteritega ära "userQuestion" andmed (info saab "publicQuestion" objektist getteritega)
-
-                // TODO: salvestame andmebaasi "userQuestion" rea (questionService-> questionRepository)
-
-
-                // TODO: teeme juurde yhe uue (new QuizQuestion) tüüpi objekti "userQuizQuestion" (uus rida)
-
-                // TODO:  täidame setteritega ära "userQuizQuestion" andmed (info saab "publicQuizQuestion" objektist getteritega)
-
-                // TODO: salvestame andmebaasi "userQuizQuestion" rea (quizQuestionService-> quizQuestionRepository)
-
-                // TODO: kasutades "publicQuestion" objekti leiame andmebaasist "publicAnswers" listi (answerService-> answerRepository)
-
-                // TODO: teeme publicu "publicAnswers" listist for tsykkli - ja nimetame tsykli yksik objekti nimeks "publicAnswer"
-                // TODO: tsykkli sees teeme:
-
-                        // TODO: teeme juurde yhe uue (new Answer) tüüpi objekti "userAnswer" (uus rida)
-
-                        // TODO:  täidame setteritega ära "userAnswer" andmed (info saab "publicAnswer" objektist getteritega)
-
-                        // TODO: salvestame andmebaasi "userAnswer" rea (answerService-> answerRepository)
-
-        // TODO: THE END - JUHUUUUUU!!! :)
-
-
-
+        for (QuizQuestion publicQuizQuestion : publicQuizQuestions) {
+            Question publicQuestion = publicQuizQuestion.getQuestion();
+            Question userQuestion = new Question();
+            userQuestion.setText(publicQuestion.getText());
+            userQuestion.setPicture(publicQuestion.getPicture());
+            userQuestion.setType(publicQuestion.getType());
+            questionService.saveQuestion(userQuestion);
+            QuizQuestion userQuizQuestion = new QuizQuestion();
+            userQuizQuestion.setQuiz(publicQuizQuestion.getQuiz());
+            userQuizQuestion.setQuestion(publicQuizQuestion.getQuestion());
+            userQuizQuestion.setStatus(ACTIVE);
+            userQuizQuestion.setTimestamp(Instant.now());
+            quizQuestionService.saveQuizQuestion(userQuizQuestion);
+            List<Answer> publicAnswers = answerService.findAnswers(publicQuestion.getId());
+            for (Answer publicAnswer: publicAnswers) {
+                Answer userAnswer = new Answer();
+                userAnswer.setText(publicAnswer.getText());
+                userAnswer.setPicture(publicAnswer.getPicture());
+                userAnswer.setQuestion(publicAnswer.getQuestion());
+                userAnswer.setIsCorrect(publicAnswer.getIsCorrect());
+                answerService.saveAnswer(userAnswer);
+            }
+        }
 
     }
 
