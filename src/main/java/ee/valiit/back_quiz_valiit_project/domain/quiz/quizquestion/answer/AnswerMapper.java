@@ -35,7 +35,16 @@ public interface AnswerMapper {
 
     List<AnswerResponse> toDtos(List<Answer> answers);
 
-    @InheritConfiguration (name = "toEntity")
+    @InheritConfiguration(name = "toEntity")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     Answer updateAnswer(AnswerDto answerDto, @MappingTarget Answer answer);
+
+    @Mapping(source = "id", target = "answerId")
+    @Mapping(source = "text", target = "answerText")
+    @Mapping(expression = "java(PictureUtil.byteArrayToString(answer.getPicture()))", target = "answerPicture")
+    @Mapping(source = "isCorrect", target = "answerIsCorrect")
+    AnswerInfo toInfo(Answer answer);
+
+    List<AnswerInfo> toInfos(List<Answer> answers);
+
 }

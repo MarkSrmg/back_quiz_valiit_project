@@ -1,10 +1,12 @@
 package ee.valiit.back_quiz_valiit_project.studyhelp.question.answer;
 
+import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer.AnswerInfo;
 import ee.valiit.back_quiz_valiit_project.studyhelp.dto.AnswerDto;
-import ee.valiit.back_quiz_valiit_project.studyhelp.dto.QuestionDto;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class AllAnswerController {
@@ -21,5 +23,11 @@ public class AllAnswerController {
     public void editAnswer(@RequestParam Integer answerId, @RequestBody AnswerDto answerDto) {
         allAnswerService.editAnswer(answerId, answerDto);
     }
+    @GetMapping("/questions/answer")
+    @Operation(summary = "Gets answers from database", description = "finds all answers for question with questionId")
+    public List<AnswerInfo> getAnswers (@RequestParam Integer questionId) {
+       return allAnswerService.getAnswers(questionId);
+    }
+
 
 }

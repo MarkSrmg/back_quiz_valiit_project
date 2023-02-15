@@ -2,6 +2,7 @@ package ee.valiit.back_quiz_valiit_project.studyhelp.question.answer;
 
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.Question;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer.Answer;
+import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer.AnswerInfo;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer.AnswerMapper;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer.AnswerService;
 import ee.valiit.back_quiz_valiit_project.studyhelp.dto.AnswerDto;
@@ -33,5 +34,10 @@ public class AllAnswerService {
         Answer answer = answerService.findAnswer(answerId);
         Answer updateAnswer = answerMapper.updateAnswer(answerDto, answer);
         answerService.saveAnswer(updateAnswer);
+    }
+
+    public List<AnswerInfo> getAnswers(Integer questionId) {
+        List<Answer> answers = answerService.findAnswers(questionId);
+        return answerMapper.toInfos(answers);
     }
 }

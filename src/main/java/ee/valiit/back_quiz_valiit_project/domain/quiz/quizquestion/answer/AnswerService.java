@@ -13,8 +13,8 @@ public class AnswerService {
         answerRepository.save(answer);
     }
 
-    public List<Answer> findAnswers(Integer id) {
-        return answerRepository.findByQuestion_Id(id);
+    public List<Answer> findAnswers(Integer questionId) {
+        return answerRepository.findByQuestion_Id(questionId);
     }
 
     public Answer findAnswer(Integer answerId) {
