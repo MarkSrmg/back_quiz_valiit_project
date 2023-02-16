@@ -8,8 +8,5 @@ import java.util.List;
 public interface AnswerRepository extends JpaRepository<Answer, Integer> {
 
     @Query("select a from Answer a where a.question.id = ?1  order by a.id")
-    List<Answer> findByQuestion_Id(Integer id);
-
-
-
+    List<Answer> findByQuestion_Id(Integer questionId);
 }

@@ -20,4 +20,8 @@ public class AnswerService {
     public Answer findAnswer(Integer answerId) {
         return answerRepository.findById(answerId).get();
     }
+
+    public void deleteAnswer(Integer answerId) {
+        answerRepository.deleteById(answerId);
+    }
 }

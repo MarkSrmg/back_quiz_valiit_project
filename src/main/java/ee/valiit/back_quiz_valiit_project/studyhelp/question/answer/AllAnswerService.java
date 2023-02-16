@@ -45,4 +45,8 @@ public class AllAnswerService {
         Answer answer = answerService.findAnswer(answerId);
         return answerMapper.toDto(answer);
     }
+
+    public void deleteAnswer(Integer answerId) {
+        answerService.deleteAnswer(answerId);
+    }
 }
