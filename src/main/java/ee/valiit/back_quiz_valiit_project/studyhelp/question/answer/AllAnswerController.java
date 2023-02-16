@@ -23,11 +23,17 @@ public class AllAnswerController {
     public void editAnswer(@RequestParam Integer answerId, @RequestBody AnswerDto answerDto) {
         allAnswerService.editAnswer(answerId, answerDto);
     }
-    @GetMapping("/questions/answer")
+    @GetMapping("/questions/answers")
     @Operation(summary = "Gets answers from database", description = "finds all answers for question with questionId")
     public List<AnswerInfo> getAnswers (@RequestParam Integer questionId) {
        return allAnswerService.getAnswers(questionId);
     }
+    @GetMapping("/questions/answer")
+    @Operation(summary = "Gets answer from database", description = "find answer with answerId")
+    public AnswerDto getAnswer (@RequestParam Integer answerId) {
+        return allAnswerService.getAnswer(answerId);
+    }
+
 
 
 }

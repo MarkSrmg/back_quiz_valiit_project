@@ -3,13 +3,21 @@ package ee.valiit.back_quiz_valiit_project.studyhelp.question;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.Quiz;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.QuizService;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.*;
+import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.counter.Counter;
+import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.counter.CounterService;
+import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.question.Question;
+import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.question.QuestionMapper;
+import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.question.QuestionService;
 import ee.valiit.back_quiz_valiit_project.studyhelp.Status;
 import ee.valiit.back_quiz_valiit_project.studyhelp.dto.QuestionDto;
+import ee.valiit.back_quiz_valiit_project.studyhelp.question.dto.QuestionResponse;
+import ee.valiit.back_quiz_valiit_project.studyhelp.question.dto.QuestionShort;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.util.List;
 
 
 @Service
@@ -52,5 +60,10 @@ public class AllQuestionService {
         Question question = questionService.findQuestion(questionId);
         questionMapper.updateQuestion(questionDto, question);
         questionService.saveQuestion(question);
+    }
+
+    public List<QuestionShort> getQuestions(Integer quizId) {
+        List<QuizQuestion> quizQuestions = quizQuestionService.findAllQuestions(quizId);
+        return null;
     }
 }

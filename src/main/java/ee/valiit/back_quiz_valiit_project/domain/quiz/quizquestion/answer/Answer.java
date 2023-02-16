@@ -1,6 +1,6 @@
 package ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer;
 
-import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.Question;
+import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.question.Question;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

@@ -1,4 +1,4 @@
-package ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion;
+package ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.question;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
