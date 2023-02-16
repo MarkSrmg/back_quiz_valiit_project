@@ -18,7 +18,7 @@ public class QuizzesController {
 
 
     @PostMapping()
-    @Operation(summary = "Create new Quiz", description = "Posts new quiz name and answers needed, and returs quizName and quizId")
+    @Operation(summary = "Create new Quiz", description = "Posts new quiz name and answers needed, and returns quizName and quizId")
     public QuizResponse addNewQuiz(@RequestParam Integer userId, @RequestBody QuizRequest quizRequest) {
         return quizzesService.addNewQuiz(userId, quizRequest);
     }
@@ -60,7 +60,7 @@ public class QuizzesController {
     }
 
     @PostMapping("/public-to-user")
-    @Operation(summary = "Creates copy of public quiz", description = "Enables user to add public quiz to own quizzes")
+    @Operation(summary = "Creates copy of public quiz", description = "Makes copy of public quiz including data from tables 'quiz', 'quiz_question', 'question' and 'answer'")
     public void copyPublicQuizToUser(@RequestParam Integer quizId, @RequestParam Integer userId) {
         quizzesService.copyPublicQuizToUser(quizId, userId);
     }
