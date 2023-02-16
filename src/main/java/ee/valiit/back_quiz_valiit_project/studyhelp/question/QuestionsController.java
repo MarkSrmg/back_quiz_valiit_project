@@ -10,25 +10,25 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class AllQuestionController {
+public class QuestionsController {
 
     @Resource
-    private AllQuestionService allQuestionService;
+    private QuestionsService questionsService;
 
     @GetMapping("/questions")
     @Operation(summary = "xxx", description = "x")
     public List<QuestionShort> getQuestions(@RequestParam Integer quizId) {
-        return allQuestionService.getQuestions(quizId);
+        return questionsService.getQuestions(quizId);
     }
 
     @PostMapping("/questions")
     @Operation(summary = "adds question to database", description = "adds question to question table in database after save button press")
     public QuestionResponse addQuestion(@RequestParam Integer quizId, @RequestBody QuestionDto questionDto) {
-        return allQuestionService.addQuestion(quizId, questionDto);
+        return questionsService.addQuestion(quizId, questionDto);
     }
     @PutMapping("/questions")
     @Operation(summary = "Edits question in database", description = "Finds question via Id and adds changes to question table in database after edit button press")
     public void editQuestion(@RequestParam Integer questionId, @RequestBody QuestionDto questionDto) {
-        allQuestionService.editQuestion(questionId, questionDto);
+        questionsService.editQuestion(questionId, questionDto);
     }
 }
