@@ -52,7 +52,7 @@ public class PlayService {
         QuestionResponse questionResponse = questionMapper.toDto(randomQuizQuestion.getQuestion());
         List<Answer> answers = answerService.findAnswers(randomQuizQuestion.getQuestion().getId());
         // TODO: 10.02.2023 Kui 0 siis anna teade vastuseid pole lisatud
-        List<AnswerResponse> answersResponse = answerMapper.toDtos(answers);
+        List<AnswerResponse> answersResponse = answerMapper.toResponses(answers);
         questionResponse.setAnswers(answersResponse);
         return questionResponse;
     }
