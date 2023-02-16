@@ -1,4 +1,4 @@
-package ee.valiit.back_quiz_valiit_project.studyhelp.question;
+package ee.valiit.back_quiz_valiit_project.studyhelp.question.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

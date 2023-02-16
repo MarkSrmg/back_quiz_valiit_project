@@ -3,6 +3,7 @@ package ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion;
 import ee.valiit.back_quiz_valiit_project.studyhelp.dto.QuestionDto;
 
 import ee.valiit.back_quiz_valiit_project.studyhelp.play.QuestionResponse;
+import ee.valiit.back_quiz_valiit_project.studyhelp.question.dto.QuestionShort;
 import ee.valiit.back_quiz_valiit_project.util.PictureUtil;
 import org.mapstruct.*;
 
@@ -17,6 +18,23 @@ public interface QuestionMapper {
     Question toEntity(QuestionDto questionDto);
 
 
+    @Mapping(source = "id", target = "questionId")
+    @Mapping(source = "text", target = "questionText")
+    // TODO: 09.02.2023 ByteA to string
+    @Mapping(expression = "java(PictureUtil.byteArrayToString(randomQuestion.getPicture()))", target = "questionPicture")
+    @Mapping(source = "type", target = "questionType")
+    QuestionResponse toDto(Question randomQuestion);
+
+
+    @InheritConfiguration(name = "toEntity")
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    Question updateQuestion(QuestionDto questionDto, @MappingTarget Question question);
+
+
+
+
+
+
     @Named("stringToByteArray")
     static byte[] stringToByteArray(String picture) {
         if (picture == null || picture.equals("")) {
@@ -25,24 +43,4 @@ public interface QuestionMapper {
         return picture.getBytes(StandardCharsets.UTF_8);
     }
 
-    @Mapping(source = "id", target = "questionId")
-    @Mapping(source = "text", target = "questionText")
-    // TODO: 09.02.2023 ByteA to string
-    @Mapping(expression = "java(PictureUtil.byteArrayToString(randomQuestion.getPicture()))", target = "questionPicture")
-    @Mapping(source = "type", target = "questionType")
-    QuestionResponse toDto(Question randomQuestion);
-
-//    @Named("byteArrayToString")
-//    static String byteArrayToString(byte[] picture){
-//        if (picture == null){
-//            return null;
-//        }
-//        return new String(picture);
-//    }
-
-    @InheritConfiguration(name = "toEntity")
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    Question updateQuestion(QuestionDto questionDto, @MappingTarget Question question);
-
-    QuestionDto toDto1(Question question);
 }

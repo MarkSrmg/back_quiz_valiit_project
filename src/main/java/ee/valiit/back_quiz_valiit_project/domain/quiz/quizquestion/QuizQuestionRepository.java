@@ -9,13 +9,13 @@ import java.util.Optional;
 
 public interface QuizQuestionRepository extends JpaRepository<QuizQuestion, Integer> {
     @Query("select q from QuizQuestion q where q.quiz.id = ?1")
-    List<QuizQuestion> findAllQuizQuestions(Integer id);
+    List<QuizQuestion> findAllQuizQuestions(Integer quizId);
 
     @Query("select q from QuizQuestion q where q.quiz.id = ?1 and q.question.id = ?2")
-    Optional<QuizQuestion> findQuizQuestion(Integer id, Integer id1);
+    Optional<QuizQuestion> findQuizQuestion(Integer quizId, Integer questionId);
 
     @Query("select q from QuizQuestion q where q.quiz.id = ?1 and q.status = ?2")
-    List<QuizQuestion> findAllActiveQuizQuestions(Integer id, String status);
+    List<QuizQuestion> findAllActiveQuizQuestions(Integer quizId, String status);
 
     @Query("select q from QuizQuestion q where q.quiz = ?1")
     List<QuizQuestion> findQuizQuestions(Quiz quiz);
