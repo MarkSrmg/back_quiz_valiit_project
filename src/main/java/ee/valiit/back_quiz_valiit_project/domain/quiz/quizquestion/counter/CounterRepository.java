@@ -1,4 +1,4 @@
-package ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion;
+package ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.counter;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

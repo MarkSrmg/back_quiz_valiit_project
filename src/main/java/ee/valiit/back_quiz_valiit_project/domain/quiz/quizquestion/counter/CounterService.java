@@ -1,4 +1,4 @@
-package ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion;
+package ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.counter;
 
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;

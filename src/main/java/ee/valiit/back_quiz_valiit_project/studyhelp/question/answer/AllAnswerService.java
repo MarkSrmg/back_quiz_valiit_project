@@ -1,12 +1,12 @@
 package ee.valiit.back_quiz_valiit_project.studyhelp.question.answer;
 
-import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.Question;
+import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.question.Question;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer.Answer;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer.AnswerInfo;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer.AnswerMapper;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer.AnswerService;
 import ee.valiit.back_quiz_valiit_project.studyhelp.dto.AnswerDto;
-import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.QuestionService;
+import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.question.QuestionService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 

@@ -3,11 +3,15 @@ package ee.valiit.back_quiz_valiit_project.studyhelp.quiz;
 
 import ee.valiit.back_quiz_valiit_project.domain.quiz.Quiz;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.QuizMapper;
-import ee.valiit.back_quiz_valiit_project.domain.quiz.QuizRepository;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.QuizService;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.*;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer.Answer;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer.AnswerService;
+import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.counter.Counter;
+import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.counter.CounterService;
+import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.question.Question;
+import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.question.QuestionRepository;
+import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.question.QuestionService;
 import ee.valiit.back_quiz_valiit_project.domain.user.User;
 import ee.valiit.back_quiz_valiit_project.domain.user.UserService;
 import ee.valiit.back_quiz_valiit_project.studyhelp.dto.QuizRequest;

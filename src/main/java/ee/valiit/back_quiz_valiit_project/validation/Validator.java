@@ -1,6 +1,5 @@
 package ee.valiit.back_quiz_valiit_project.validation;
 
-import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.Question;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.QuizQuestion;
 import ee.valiit.back_quiz_valiit_project.domain.user.User;
 import ee.valiit.back_quiz_valiit_project.infrastructure.exception.DataNotFoundException;
