@@ -1,6 +1,7 @@
 package ee.valiit.back_quiz_valiit_project.studyhelp.question;
 
 import ee.valiit.back_quiz_valiit_project.studyhelp.dto.QuestionDto;
+import ee.valiit.back_quiz_valiit_project.studyhelp.question.dto.QuestionResponse;
 import ee.valiit.back_quiz_valiit_project.studyhelp.question.dto.QuestionShort;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.annotation.Resource;
