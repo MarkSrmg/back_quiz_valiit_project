@@ -20,8 +20,6 @@ public interface QuizMapper {
     @Mapping(expression = "java(Instant.now())", target = "timestamp")
     Quiz toEntity(QuizRequest quizRequest);
 
-//    CreateQuizDto toDto(Quiz quiz);
-
 
     @Mapping(source = "id", target = "quizId")
     @Mapping(source = "name", target = "quizName")
@@ -29,5 +27,7 @@ public interface QuizMapper {
     QuizDto toDto(Quiz quiz);
 
     List<QuizDto> toDtos(List<Quiz> quizzes);
+
+
 
 }

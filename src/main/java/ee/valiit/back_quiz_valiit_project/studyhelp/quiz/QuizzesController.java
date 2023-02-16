@@ -34,6 +34,7 @@ public class QuizzesController {
     public List<QuizDto> getUserLast5Quizzes(@RequestParam Integer userId) {
         return quizzesService.getUserLast5Quizzes(userId);
     }
+
     @GetMapping("/user")
     @Operation(summary = "Finds all personal quizzes", description = "Finds all active quizzes in quiz table by userId")
     public List<QuizDto> getUserQuizzes(@RequestParam Integer userId) {
@@ -51,10 +52,17 @@ public class QuizzesController {
     public List<QuizDto> getPublicQuizzes() {
         return quizzesService.getPublicQuizzes();
     }
+
     @DeleteMapping()
     @Operation(summary = "Deletes Quiz", description = "Finds quiz by quizId, adds timestamp to name and sets status to deactivated")
     public void deleteQuiz(@RequestParam Integer quizId) {
         quizzesService.deleteQuiz(quizId);
     }
 
+    @PostMapping("/public-to-user")
+    @Operation(summary = "Creates copy of public quiz", description = "Enables user to add public quiz to own quizzes")
+    public void copyPublicQuizToUser(@RequestParam Integer quizId, @RequestParam Integer userId) {
+        quizzesService.copyPublicQuizToUser(quizId, userId);
+    }
 }
+
