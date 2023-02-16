@@ -16,7 +16,7 @@ public class AllQuestionController {
     private AllQuestionService allQuestionService;
 
     @GetMapping("/questions")
-    @Operation(summary = "xxx", description = "x")
+    @Operation(summary = "Finds all questions by QuizId and enables to edit them", description = "x")
     public List<QuestionShort> getQuestions(@RequestParam Integer quizId) {
         return allQuestionService.getQuestions(quizId);
     }

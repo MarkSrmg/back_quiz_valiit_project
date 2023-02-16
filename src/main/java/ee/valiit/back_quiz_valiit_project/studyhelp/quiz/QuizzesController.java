@@ -29,11 +29,6 @@ public class QuizzesController {
         quizzesService.resetCounter(quizId);
     }
 
-//    @PutMapping("/edit")
-//    @Operation(summary = "Finds all questions by QuizId and enables to edit them", description = "")
-//    public List<>
-
-
     @GetMapping("/user/last-5")
     @Operation(summary = "Finds last 5 personal quizzes", description = "Finds last 5 active quizzes in quiz table by userId")
     public List<QuizDto> getUserLast5Quizzes(@RequestParam Integer userId) {
