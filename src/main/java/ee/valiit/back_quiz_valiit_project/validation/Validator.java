@@ -1,6 +1,7 @@
 package ee.valiit.back_quiz_valiit_project.validation;
 
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.QuizQuestion;
+import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer.Answer;
 import ee.valiit.back_quiz_valiit_project.domain.user.User;
 import ee.valiit.back_quiz_valiit_project.infrastructure.exception.DataNotFoundException;
 
@@ -24,5 +25,19 @@ public class Validator {
             throw new DataNotFoundException(NO_QUESTIONS_TO_ANSWER.getMessage(), NO_QUESTIONS_TO_ANSWER.getCode());
         }
         return unansweredQuizQuestions;
+    }
+
+    public static List<QuizQuestion> getValidQuestions(List<QuizQuestion> questions) {
+        if(questions.isEmpty()){
+            throw new DataNotFoundException(NO_QUESTIONS_ADDED.getMessage(), NO_QUESTIONS_ADDED.getCode());
+        }
+        return questions;
+    }
+
+    public static List<Answer> getValidAnswers(List<Answer> answers) {
+        if(answers.isEmpty()){
+            throw new DataNotFoundException(NO_ANSWERS_ADDED.getMessage(), NO_ANSWERS_ADDED.getCode());
+        }
+        return answers;
     }
 }

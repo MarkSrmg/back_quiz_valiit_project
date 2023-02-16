@@ -21,7 +21,7 @@ import java.util.List;
 
 
 @Service
-public class AllQuestionService {
+public class QuestionsService {
     @Resource
     private QuestionMapper questionMapper;
 
