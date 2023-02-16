@@ -22,8 +22,7 @@ import java.util.List;
 
 @Service
 public class QuestionsService {
-    @Resource
-    private QuestionMapper questionMapper;
+
 
     @Resource
     private QuestionService questionService;
@@ -33,6 +32,10 @@ public class QuestionsService {
     private QuizService quizService;
     @Resource
     private CounterService counterService;
+    @Resource
+    private QuestionMapper questionMapper;
+    @Resource
+    private QuizQuestionMapper quizQuestionMapper;
 
     @Transactional
     public QuestionResponse addQuestion(Integer quizId, QuestionDto questionDto) {
@@ -64,6 +67,16 @@ public class QuestionsService {
 
     public List<QuestionShort> getQuestions(Integer quizId) {
         List<QuizQuestion> quizQuestions = quizQuestionService.findAllQuestions(quizId);
-        return null;
+        List<QuestionShort> questionShorts = quizQuestionMapper.toQuestionShorts(quizQuestions);
+        addQuestionNumber(questionShorts);
+        return questionShorts;
+    }
+
+    private static void addQuestionNumber(List<QuestionShort> questionShorts) {
+        int counter = 1;
+        for (QuestionShort questionShort : questionShorts) {
+            questionShort.setQuestionNumber(counter);
+            counter++;
+        }
     }
 }
