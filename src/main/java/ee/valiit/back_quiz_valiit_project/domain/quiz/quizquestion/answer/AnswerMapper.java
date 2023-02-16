@@ -5,24 +5,15 @@ import ee.valiit.back_quiz_valiit_project.studyhelp.play.AnswerResponse;
 import ee.valiit.back_quiz_valiit_project.util.PictureUtil;
 import org.mapstruct.*;
 
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring",imports = {PictureUtil.class})
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring", imports = {PictureUtil.class})
 public interface AnswerMapper {
 
-    @Mapping(source = "answerPicture", target = "picture", qualifiedByName = "stringToByteArray")
+    @Mapping(expression = "java(PictureUtil.stringToByteArray(answerDto.getAnswerPicture()))", target = "picture")
     @Mapping(source = "answerText", target = "text")
     @Mapping(source = "answerIsCorrect", target = "isCorrect")
     Answer toEntity(AnswerDto answerDto);
-
-    @Named("stringToByteArray")
-    static byte[] stringToByteArray(String picture) {
-        if (picture == null || picture.equals("")) {
-            return null;
-        }
-        return picture.getBytes(StandardCharsets.UTF_8);
-    }
 
     @Mapping(source = "id", target = "answerId")
     @Mapping(source = "text", target = "answerText")
@@ -30,10 +21,10 @@ public interface AnswerMapper {
     @Mapping(constant = "false", target = "isSelected")
     @Mapping(constant = "unanswered", target = "isAnswered")
     @Mapping(source = "isCorrect", target = "isCorrect")
-    AnswerResponse toDto(Answer answer);
+    AnswerResponse toResponse(Answer answer);
 
 
-    List<AnswerResponse> toDtos(List<Answer> answers);
+    List<AnswerResponse> toResponses(List<Answer> answers);
 
     @InheritConfiguration(name = "toEntity")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
@@ -46,5 +37,10 @@ public interface AnswerMapper {
     AnswerInfo toInfo(Answer answer);
 
     List<AnswerInfo> toInfos(List<Answer> answers);
+
+    @Mapping(source = "text", target = "answerText")
+    @Mapping(expression = "java(PictureUtil.byteArrayToString(answer.getPicture()))", target = "answerPicture")
+    @Mapping(source = "isCorrect", target = "answerIsCorrect")
+    AnswerDto toDto(Answer answer);
 
 }

@@ -40,4 +40,9 @@ public class AllAnswerService {
         List<Answer> answers = answerService.findAnswers(questionId);
         return answerMapper.toInfos(answers);
     }
+
+    public AnswerDto getAnswer(Integer answerId) {
+        Answer answer = answerService.findAnswer(answerId);
+        return answerMapper.toDto(answer);
+    }
 }
