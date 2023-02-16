@@ -35,26 +35,46 @@ public class PlayService {
         this.counterRepository = counterRepository;
     }
 
+    public QuestionResponse findPublicQuestion(Integer quizId) {
+        List<QuizQuestion> validQuestions = findAllActiveQuizQuestions(quizId);
+        QuizQuestion randomQuizQuestion = getRandomQuizQuestion(validQuestions);
+        QuestionResponse questionResponse = questionMapper.toDto(randomQuizQuestion.getQuestion());
+        findAnswers(randomQuizQuestion, questionResponse);
+        return questionResponse;
+    }
     public QuestionResponse findQuestion(Integer quizId) {
-        Quiz quiz = quizService.findQuiz(quizId);
-        List<QuizQuestion> questions = quizQuestionService.findAllActiveQuizQuestions(quiz.getId(), Status.ACTIVE);
-        // TODO: 10.02.2023 Kui 0 anna teade küsimusi pole lisatud 
+        List<QuizQuestion> validQuestions = findAllActiveQuizQuestions(quizId);
+        List<QuizQuestion> validUnasnweredQuizQuestions = findAllUnansweredQuizQuestions(validQuestions);
+        QuizQuestion randomQuizQuestion = getRandomQuizQuestion(validUnasnweredQuizQuestions);
+        QuestionResponse questionResponse = questionMapper.toDto(randomQuizQuestion.getQuestion());
+        findAnswers(randomQuizQuestion, questionResponse);
+        return questionResponse;
+    }
+
+    private List<QuizQuestion> findAllUnansweredQuizQuestions(List<QuizQuestion> validQuestions) {
         List<QuizQuestion> unansweredQuizQuestions = new ArrayList<>();
-        for(QuizQuestion question : questions){
+        for(QuizQuestion question : validQuestions){
            Counter counter = counterService.findQuestionCorrectCount(question.getId());
             if (question.getQuiz().getRequiredCount() > counter.getCorrectCount()){
                 unansweredQuizQuestions.add(question);
-                // TODO: 10.02.2023 Kui unanswered 0 siis anna teade et kõik on vastatud 
             }
         }
         List<QuizQuestion> validUnasnweredQuizQuestions = Validator.getValidUnasnweredQuizQuestions(unansweredQuizQuestions);
-        QuizQuestion randomQuizQuestion = getRandomQuizQuestion(validUnasnweredQuizQuestions);
-        QuestionResponse questionResponse = questionMapper.toDto(randomQuizQuestion.getQuestion());
+        return validUnasnweredQuizQuestions;
+    }
+
+    private List<QuizQuestion> findAllActiveQuizQuestions(Integer quizId) {
+        Quiz quiz = quizService.findQuiz(quizId);
+        List<QuizQuestion> questions = quizQuestionService.findAllActiveQuizQuestions(quiz.getId(), Status.ACTIVE);
+        List<QuizQuestion>validQuestions = Validator.getValidQuestions(questions);
+        return validQuestions;
+    }
+
+    private void findAnswers(QuizQuestion randomQuizQuestion, QuestionResponse questionResponse) {
         List<Answer> answers = answerService.findAnswers(randomQuizQuestion.getQuestion().getId());
-        // TODO: 10.02.2023 Kui 0 siis anna teade vastuseid pole lisatud
-        List<AnswerResponse> answersResponse = answerMapper.toDtos(answers);
+        List<Answer> validAnswers = Validator.getValidAnswers(answers);
+        List<AnswerResponse> answersResponse = answerMapper.toDtos(validAnswers);
         questionResponse.setAnswers(answersResponse);
-        return questionResponse;
     }
 
     public static QuizQuestion getRandomQuizQuestion(List<QuizQuestion> unansweredQuestions) {
