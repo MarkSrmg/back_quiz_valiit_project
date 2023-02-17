@@ -24,4 +24,5 @@ public class QuizDto implements Serializable {
     @Size(max = 1)
     @NotNull
     private String quizType;
+    private Integer deg = 0;
 }
