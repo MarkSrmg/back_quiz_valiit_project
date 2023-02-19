@@ -101,64 +101,7 @@ public class QuizzesService {
 
     public void copyPublicQuizToUser(Integer quizId, Integer userId) {
         Quiz publicQuiz = quizService.findQuiz(quizId);
-        Quiz userQuiz = createAndSaveUserQuiz(userId, publicQuiz);
-
-        List<QuizQuestion> publicQuizQuestions = quizQuestionService.findAllQuestions(publicQuiz.getId());
-        for (QuizQuestion publicQuizQuestion : publicQuizQuestions) {
-            Question publicQuestion = publicQuizQuestion.getQuestion();
-            createAndSaveUserQuestion(publicQuestion);
-            createAndSaveUserQuizQuestion(userQuiz, publicQuestion);
-            createAndSaveUserAnswers(publicQuestion);
-        }
-    }
-
-    private Quiz createAndSaveUserQuiz(Integer userId, Quiz publicQuiz) {
         User user = userService.findUser(userId);
-        Quiz userQuiz = createUserQuiz(publicQuiz, user);
-        quizService.saveQuiz(userQuiz);
-        return userQuiz;
-    }
-
-    private void createAndSaveUserQuestion(Question publicQuestion) {
-        Question userQuestion = createUserQuestion(publicQuestion);
-        questionService.saveQuestion(userQuestion);
-    }
-
-    private void createAndSaveUserQuizQuestion(Quiz userQuiz, Question publicQuestion) {
-        QuizQuestion userQuizQuestion = createQuizQuestion(userQuiz, publicQuestion);
-        quizQuestionService.saveQuizQuestion(userQuizQuestion);
-    }
-
-    private static QuizQuestion createQuizQuestion(Quiz userQuiz, Question publicQuestion) {
-        QuizQuestion userQuizQuestion = new QuizQuestion();
-        userQuizQuestion.setQuiz(userQuiz);
-        userQuizQuestion.setQuestion(publicQuestion);
-        userQuizQuestion.setStatus(ACTIVE);
-        userQuizQuestion.setTimestamp(Instant.now());
-        return userQuizQuestion;
-    }
-
-    private void createAndSaveUserAnswers(Question publicQuestion) {
-        List<Answer> publicAnswers = answerService.findAnswers(publicQuestion.getId());
-        for (Answer publicAnswer : publicAnswers) {
-            Answer userAnswer = new Answer();
-            userAnswer.setText(publicAnswer.getText());
-            userAnswer.setPicture(publicAnswer.getPicture());
-            userAnswer.setQuestion(publicAnswer.getQuestion());
-            userAnswer.setIsCorrect(publicAnswer.getIsCorrect());
-            answerService.saveAnswer(userAnswer);
-        }
-    }
-
-    private static Question createUserQuestion(Question publicQuestion) {
-        Question userQuestion = new Question();
-        userQuestion.setText(publicQuestion.getText());
-        userQuestion.setPicture(publicQuestion.getPicture());
-        userQuestion.setType(publicQuestion.getType());
-        return userQuestion;
-    }
-
-    private static Quiz createUserQuiz(Quiz publicQuiz, User user) {
         Quiz userQuiz = new Quiz();
         userQuiz.setUser(user);
         userQuiz.setName(publicQuiz.getName());
@@ -167,6 +110,34 @@ public class QuizzesService {
         userQuiz.setIsPublic(false);
         userQuiz.setStatus(ACTIVE);
         userQuiz.setRequiredCount(DEFAULT_REQUIRED_COUNT);
-        return userQuiz;
+        quizService.saveQuiz(userQuiz);
+
+        List<QuizQuestion> publicQuizQuestions = quizQuestionService.findAllQuestions(publicQuiz.getId());
+        for (QuizQuestion publicQuizQuestion : publicQuizQuestions) {
+            Question publicQuestion = publicQuizQuestion.getQuestion();
+            Question userQuestion = new Question();
+            userQuestion.setText(publicQuestion.getText());
+            userQuestion.setPicture(publicQuestion.getPicture());
+            userQuestion.setType(publicQuestion.getType());
+            questionService.saveQuestion(userQuestion);
+
+            QuizQuestion userQuizQuestion = new QuizQuestion();
+            userQuizQuestion.setQuiz(userQuiz);
+            userQuizQuestion.setQuestion(userQuestion);
+            userQuizQuestion.setStatus(ACTIVE);
+            userQuizQuestion.setTimestamp(Instant.now());
+            quizQuestionService.saveQuizQuestion(userQuizQuestion);
+
+            List<Answer> publicAnswers = answerService.findAnswers(publicQuestion.getId());
+            for (Answer publicAnswer : publicAnswers) {
+                Answer userAnswer = new Answer();
+                userAnswer.setText(publicAnswer.getText());
+                userAnswer.setPicture(publicAnswer.getPicture());
+                userAnswer.setQuestion(userQuestion);
+                userAnswer.setIsCorrect(publicAnswer.getIsCorrect());
+                answerService.saveAnswer(userAnswer);
+            }
+        }
     }
+
 }
