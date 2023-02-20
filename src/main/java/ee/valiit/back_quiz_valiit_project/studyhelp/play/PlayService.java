@@ -63,8 +63,8 @@ public class PlayService {
                 unansweredQuizQuestions.add(question);
             }
         }
-        List<QuizQuestion> validUnasnweredQuizQuestions = Validator.getValidUnasnweredQuizQuestions(unansweredQuizQuestions);
-        return validUnasnweredQuizQuestions;
+        List<QuizQuestion> validUnansweredQuizQuestions = Validator.getValidUnasnweredQuizQuestions(unansweredQuizQuestions);
+        return validUnansweredQuizQuestions;
     }
 
     private List<QuizQuestion> findAllActiveQuizQuestions(Integer quizId) {
