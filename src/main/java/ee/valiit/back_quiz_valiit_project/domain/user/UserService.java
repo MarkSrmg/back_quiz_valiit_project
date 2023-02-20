@@ -20,4 +20,8 @@ public class UserService {
         return userRepository.findById(userId).get();
     }
 
+    public Optional <User> findUniqueUsername(String userName) {
+        Optional<User> user = userRepository.findByUsername(userName);
+        return user;
+    }
 }
