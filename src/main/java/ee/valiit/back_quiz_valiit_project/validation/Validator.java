@@ -3,6 +3,7 @@ package ee.valiit.back_quiz_valiit_project.validation;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.QuizQuestion;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer.Answer;
 import ee.valiit.back_quiz_valiit_project.domain.user.User;
+import ee.valiit.back_quiz_valiit_project.infrastructure.exception.BusinessException;
 import ee.valiit.back_quiz_valiit_project.infrastructure.exception.DataNotFoundException;
 
 import java.util.List;
@@ -39,5 +40,17 @@ public class Validator {
             throw new DataNotFoundException(NO_ANSWERS_ADDED.getMessage(), NO_ANSWERS_ADDED.getCode());
         }
         return answers;
+    }
+
+    public static void getValidUniqueUser(Optional<User> user) {
+        if (user.isPresent())
+            throw new BusinessException(USERNAME_TAKEN.getMessage(), USERNAME_TAKEN.getCode());
+    }
+
+    public static List<User> getValidUsers(List<User> pendingUsers) {
+        if (pendingUsers.isEmpty()){
+            throw new  BusinessException(ALL_USERS_ARE_VALID.getMessage(), ALL_USERS_ARE_VALID.getCode());
+        }
+        return pendingUsers;
     }
 }

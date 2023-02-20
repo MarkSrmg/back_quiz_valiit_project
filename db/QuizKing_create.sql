@@ -62,6 +62,7 @@ CREATE TABLE "user" (
     role_id int  NOT NULL,
     username varchar(255)  NOT NULL,
     password varchar(255)  NOT NULL,
+    email varchar(255)  NULL,
     status char(1)  NOT NULL,
     CONSTRAINT username UNIQUE (username) NOT DEFERRABLE  INITIALLY IMMEDIATE,
     CONSTRAINT user_pk PRIMARY KEY (id)
@@ -71,48 +72,48 @@ CREATE TABLE "user" (
 -- Reference: answer_question (table: answer)
 ALTER TABLE answer ADD CONSTRAINT answer_question
     FOREIGN KEY (question_id)
-    REFERENCES question (id)  
-    NOT DEFERRABLE 
+    REFERENCES question (id)
+    NOT DEFERRABLE
     INITIALLY IMMEDIATE
 ;
 
 -- Reference: counter_quiz_question (table: counter)
 ALTER TABLE counter ADD CONSTRAINT counter_quiz_question
     FOREIGN KEY (quiz_question_id)
-    REFERENCES quiz_question (id)  
-    NOT DEFERRABLE 
+    REFERENCES quiz_question (id)
+    NOT DEFERRABLE
     INITIALLY IMMEDIATE
 ;
 
 -- Reference: quiz_question_question (table: quiz_question)
 ALTER TABLE quiz_question ADD CONSTRAINT quiz_question_question
     FOREIGN KEY (question_id)
-    REFERENCES question (id)  
-    NOT DEFERRABLE 
+    REFERENCES question (id)
+    NOT DEFERRABLE
     INITIALLY IMMEDIATE
 ;
 
 -- Reference: quiz_question_quiz (table: quiz_question)
 ALTER TABLE quiz_question ADD CONSTRAINT quiz_question_quiz
     FOREIGN KEY (quiz_id)
-    REFERENCES quiz (id)  
-    NOT DEFERRABLE 
+    REFERENCES quiz (id)
+    NOT DEFERRABLE
     INITIALLY IMMEDIATE
 ;
 
 -- Reference: quiz_user (table: quiz)
 ALTER TABLE quiz ADD CONSTRAINT quiz_user
     FOREIGN KEY (user_id)
-    REFERENCES "user" (id)  
-    NOT DEFERRABLE 
+    REFERENCES "user" (id)
+    NOT DEFERRABLE
     INITIALLY IMMEDIATE
 ;
 
 -- Reference: user_role (table: user)
 ALTER TABLE "user" ADD CONSTRAINT user_role
     FOREIGN KEY (role_id)
-    REFERENCES role (id)  
-    NOT DEFERRABLE 
+    REFERENCES role (id)
+    NOT DEFERRABLE
     INITIALLY IMMEDIATE
 ;
 

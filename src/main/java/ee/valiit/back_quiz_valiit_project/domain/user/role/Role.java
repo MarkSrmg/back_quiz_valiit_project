@@ -1,4 +1,4 @@
-package ee.valiit.back_quiz_valiit_project.domain.user;
+package ee.valiit.back_quiz_valiit_project.domain.user.role;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
