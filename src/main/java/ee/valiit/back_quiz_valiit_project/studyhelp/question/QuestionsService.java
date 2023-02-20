@@ -82,8 +82,8 @@ public class QuestionsService {
         }
     }
 
-    public void deleteQuestion(Integer questionId, Integer quizId) {
-        QuizQuestion quizQuestion = quizQuestionService.findQuizQuestion(questionId, quizId);
+    public void deleteQuestion(Integer questionId) {
+        QuizQuestion quizQuestion = quizQuestionService.findQuizQuestion(questionId);
         quizQuestionService.deleteQuestion(quizQuestion);
     }
 

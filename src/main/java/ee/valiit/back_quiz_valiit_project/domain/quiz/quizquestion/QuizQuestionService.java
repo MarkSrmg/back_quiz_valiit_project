@@ -28,5 +28,10 @@ public class QuizQuestionService {
 
     public void deleteQuestion(QuizQuestion quizQuestion) {
         quizQuestion.setStatus(Status.DEACTIVATED);
+        quizQuestionRepository.save(quizQuestion);
+    }
+
+    public QuizQuestion findQuizQuestion(Integer questionId) {
+        return quizQuestionRepository.findByQuestion_Id(questionId);
     }
 }

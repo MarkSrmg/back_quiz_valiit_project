@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface QuizQuestionRepository extends JpaRepository<QuizQuestion, Integer> {
+    QuizQuestion findByQuestion_Id(Integer id);
     @Query("select q from QuizQuestion q where q.quiz.id = ?1")
     List<QuizQuestion> findAllQuizQuestions(Integer quizId);
 

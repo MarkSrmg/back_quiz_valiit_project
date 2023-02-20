@@ -38,8 +38,8 @@ public class QuestionsController {
     }
     @DeleteMapping("/questions")
     @Operation(summary = "Deletes question from database", description = "Finds question via Id and changes the status in quiz_question to deactivated")
-    public void deleteQuestion(@RequestParam Integer questionId, @RequestParam Integer quizId) {
-        questionsService.deleteQuestion(questionId, quizId);
+    public void deleteQuestion(@RequestParam Integer questionId) {
+        questionsService.deleteQuestion(questionId);
     }
 
 }
