@@ -10,7 +10,8 @@ public enum ErrorMessage {
     NO_QUESTIONS_ADDED("There are no questions added to this quiz", "400"),
     NO_ANSWERS_ADDED("There are no answers added to this question", "400"),
     USERNAME_TAKEN("This username is already taken", "888"),
-    INCORRECT_ID ("Id not found", "777");
+    INCORRECT_ID ("Id not found", "777"),
+    ALL_USERS_ARE_VALID ("All users are valid", "889");
 
     private String message;
     private String code;

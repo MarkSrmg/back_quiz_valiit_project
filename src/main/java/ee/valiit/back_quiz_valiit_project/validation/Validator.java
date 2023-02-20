@@ -46,4 +46,11 @@ public class Validator {
         if (user.isPresent())
             throw new BusinessException(USERNAME_TAKEN.getMessage(), USERNAME_TAKEN.getCode());
     }
+
+    public static List<User> getValidUsers(List<User> pendingUsers) {
+        if (pendingUsers.isEmpty()){
+            throw new  BusinessException(ALL_USERS_ARE_VALID.getMessage(), ALL_USERS_ARE_VALID.getCode());
+        }
+        return pendingUsers;
+    }
 }

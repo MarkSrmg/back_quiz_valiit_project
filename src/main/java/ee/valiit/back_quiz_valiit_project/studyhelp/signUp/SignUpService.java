@@ -5,11 +5,14 @@ import ee.valiit.back_quiz_valiit_project.domain.user.UserMapper;
 import ee.valiit.back_quiz_valiit_project.domain.user.UserService;
 import ee.valiit.back_quiz_valiit_project.domain.user.role.Role;
 import ee.valiit.back_quiz_valiit_project.domain.user.role.RoleService;
+import ee.valiit.back_quiz_valiit_project.domain.user.role.RoleType;
+import ee.valiit.back_quiz_valiit_project.studyhelp.signUp.dto.PendingResponse;
 import ee.valiit.back_quiz_valiit_project.studyhelp.signUp.dto.UserDto;
 import ee.valiit.back_quiz_valiit_project.validation.Validator;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 import static ee.valiit.back_quiz_valiit_project.domain.user.role.RoleType.PENDING;
@@ -43,4 +46,10 @@ public class SignUpService {
         userService.saveUser(newUser);
     }
 
+    public List<PendingResponse> getPendingUser() {
+        List<User> pendingUsers = userService.findPendingUsers(PENDING);
+        List<User> users = Validator.getValidUsers(pendingUsers);
+        List <PendingResponse> pendingResponse = userMapper.toPendingResponse(users);
+        return pendingResponse;
+    }
 }

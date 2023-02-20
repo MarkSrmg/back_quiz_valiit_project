@@ -4,6 +4,7 @@ import ee.valiit.back_quiz_valiit_project.validation.Validator;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,5 +28,9 @@ public class UserService {
 
     public void saveUser(User newUser) {
         userRepository.save(newUser);
+    }
+
+    public List <User> findPendingUsers(String pending) {
+        return userRepository.findByRole_Name(pending);
     }
 }
