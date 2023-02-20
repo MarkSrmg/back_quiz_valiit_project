@@ -34,7 +34,7 @@ public class AllAnswerController {
         return allAnswerService.getAnswer(answerId);
     }
     @DeleteMapping("/answer")
-    @Operation(summary = "Gets answer from database", description = "find answer with answerId")
+    @Operation(summary = "Deletes answer from database", description = "find answer with answerId and deletes it")
     public void deleteAnswer (@RequestParam Integer answerId) {
         allAnswerService.deleteAnswer(answerId);
     }

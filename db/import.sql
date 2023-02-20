@@ -23,9 +23,9 @@ INSERT INTO public.question (id, text, picture, type) VALUES (DEFAULT, 'public f
 INSERT INTO public.answer (id, text, picture, question_id, is_correct) VALUES (DEFAULT, 'private (student)  Quizz 1 kysimus vastus A (vale)', null, 1, false); --answer_id 1
 INSERT INTO public.answer (id, text, picture, question_id, is_correct) VALUES (DEFAULT, 'private (student)  Quizz 1 kysimus vastus B (vale)', null, 1, false); --answer_id 2
 INSERT INTO public.answer (id, text, picture, question_id, is_correct) VALUES (DEFAULT, 'private (student)  Quizz 1 kysimus vastus C (oige)', null, 1, true); --answer_id 3
-INSERT INTO public.answer (id, text, picture, question_id, is_correct) VALUES (DEFAULT, 'public (student)  Quizz 2 kysimus vastus A (vale)', null, 2, false); --answer_id 4
-INSERT INTO public.answer (id, text, picture, question_id, is_correct) VALUES (DEFAULT, 'public (student)  Quizz 2 kysimus vastus B (vale)', null, 2, false); --answer_id 5
-INSERT INTO public.answer (id, text, picture, question_id, is_correct) VALUES (DEFAULT, 'public (student)  Quizz 2 kysimus vastus C (oige)', null, 2, true); --answer_id 6
+INSERT INTO public.answer (id, text, picture, question_id, is_correct) VALUES (DEFAULT, 'private (student)  Quizz 2 kysimus vastus A (vale)', null, 2, false); --answer_id 4
+INSERT INTO public.answer (id, text, picture, question_id, is_correct) VALUES (DEFAULT, 'private (student)  Quizz 2 kysimus vastus B (vale)', null, 2, false); --answer_id 5
+INSERT INTO public.answer (id, text, picture, question_id, is_correct) VALUES (DEFAULT, 'private (student)  Quizz 2 kysimus vastus C (oige)', null, 2, true); --answer_id 6
 INSERT INTO public.answer (id, text, picture, question_id, is_correct) VALUES (DEFAULT, 'private (student) Flash 1 vastus', NULL, 3, true); --answer_id 7
 INSERT INTO public.answer (id, text, picture, question_id, is_correct) VALUES (DEFAULT, 'private (student) Flash 2 vastus', NULL, 4, true); --answer_id 8
 INSERT INTO public.answer (id, text, picture, question_id, is_correct) VALUES (DEFAULT, 'public Quiz 1 vastus A (vale)', NULL, 5, false); --answer_id 9
@@ -34,8 +34,8 @@ INSERT INTO public.answer (id, text, picture, question_id, is_correct) VALUES (D
 INSERT INTO public.answer (id, text, picture, question_id, is_correct) VALUES (DEFAULT, 'public Quiz 2 vastus A (vale)', NULL, 6, false); --answer_id 12
 INSERT INTO public.answer (id, text, picture, question_id, is_correct) VALUES (DEFAULT, 'public Quiz 2 vastus B (vale)', NULL, 6, false); --answer_id 13
 INSERT INTO public.answer (id, text, picture, question_id, is_correct) VALUES (DEFAULT, 'public Quiz 2 vastus C (oige)', NULL, 6, true); --answer_id 14
-INSERT INTO public.answer (id, text, picture, question_id, is_correct) VALUES (DEFAULT, 'private (student) Flash 1 vastus', NULL, 7, true); --answer_id 15
-INSERT INTO public.answer (id, text, picture, question_id, is_correct) VALUES (DEFAULT, 'private (student) Flash 2 vastus', NULL, 8, true); --answer_id 16
+INSERT INTO public.answer (id, text, picture, question_id, is_correct) VALUES (DEFAULT, 'public Flash 1 vastus', NULL, 7, true); --answer_id 15
+INSERT INTO public.answer (id, text, picture, question_id, is_correct) VALUES (DEFAULT, 'public Flash 2 vastus', NULL, 8, true); --answer_id 16
 
 
 INSERT INTO public.quiz_question (id, quiz_id, question_id, status, timestamp) VALUES (DEFAULT, 1, 1, 'A', '2023-02-07 14:38:05.000000'); --quiz_question_id 1

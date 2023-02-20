@@ -19,6 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.util.List;
 
+import static ee.valiit.back_quiz_valiit_project.domain.user.Status.ACTIVE;
+
 
 @Service
 public class QuestionsService {
@@ -66,7 +68,7 @@ public class QuestionsService {
     }
 
     public List<QuestionShort> getQuestions(Integer quizId) {
-        List<QuizQuestion> quizQuestions = quizQuestionService.findAllQuestions(quizId);
+        List<QuizQuestion> quizQuestions = quizQuestionService.findAllActiveQuizQuestions(quizId, ACTIVE);
         List<QuestionShort> questionShorts = quizQuestionMapper.toQuestionShorts(quizQuestions);
         addQuestionNumber(questionShorts);
         return questionShorts;
@@ -78,5 +80,10 @@ public class QuestionsService {
             questionShort.setQuestionNumber(counter);
             counter++;
         }
+    }
+
+    public void deleteQuestion(Integer questionId, Integer quizId) {
+        QuizQuestion quizQuestion = quizQuestionService.findQuizQuestion(questionId, quizId);
+        quizQuestionService.deleteQuestion(quizQuestion);
     }
 }
