@@ -30,6 +30,7 @@ import static ee.valiit.back_quiz_valiit_project.studyhelp.Status.DEACTIVATED;
 @Service
 public class QuizzesService {
     public static final int DEFAULT_REQUIRED_COUNT = 1;
+    public static final int DEFAULT_CORRECT_COUNT = 0;
     @Resource
     private QuizService quizService;
     @Resource
@@ -101,7 +102,19 @@ public class QuizzesService {
 
     public void copyPublicQuizToUser(Integer quizId, Integer userId) {
         Quiz publicQuiz = quizService.findQuiz(quizId);
-        User user = userService.findUser(userId);
+        Quiz userQuiz = createAndSaveUserQuiz(userId, publicQuiz);
+        List<QuizQuestion> publicQuizQuestions = quizQuestionService.findAllQuestions(publicQuiz.getId());
+        for (QuizQuestion publicQuizQuestion : publicQuizQuestions) {
+            Question publicQuestion = publicQuizQuestion.getQuestion();
+            Question userQuestion = createUserQuestion(publicQuestion);
+            questionService.saveQuestion(userQuestion);
+            QuizQuestion userQuizQuestion = createAndSaveUserQuizQuestion(userQuiz, userQuestion);
+            createAndSaveUserCounter(userQuizQuestion);
+            createAndSaveUserAnswers(publicQuestion, userQuestion);
+        }
+    }
+
+    private static Quiz createUserQuiz(Quiz publicQuiz, User user) {
         Quiz userQuiz = new Quiz();
         userQuiz.setUser(user);
         userQuiz.setName(publicQuiz.getName());
@@ -110,33 +123,55 @@ public class QuizzesService {
         userQuiz.setIsPublic(false);
         userQuiz.setStatus(ACTIVE);
         userQuiz.setRequiredCount(DEFAULT_REQUIRED_COUNT);
+        return userQuiz;
+    }
+
+    private Quiz createAndSaveUserQuiz(Integer userId, Quiz publicQuiz) {
+        User user = userService.findUser(userId);
+        Quiz userQuiz = createUserQuiz(publicQuiz, user);
         quizService.saveQuiz(userQuiz);
+        return userQuiz;
+    }
 
-        List<QuizQuestion> publicQuizQuestions = quizQuestionService.findAllQuestions(publicQuiz.getId());
-        for (QuizQuestion publicQuizQuestion : publicQuizQuestions) {
-            Question publicQuestion = publicQuizQuestion.getQuestion();
-            Question userQuestion = new Question();
-            userQuestion.setText(publicQuestion.getText());
-            userQuestion.setPicture(publicQuestion.getPicture());
-            userQuestion.setType(publicQuestion.getType());
-            questionService.saveQuestion(userQuestion);
+    private static Question createUserQuestion(Question publicQuestion) {
+        Question userQuestion = new Question();
+        userQuestion.setText(publicQuestion.getText());
+        userQuestion.setPicture(publicQuestion.getPicture());
+        userQuestion.setType(publicQuestion.getType());
+        return userQuestion;
+    }
 
-            QuizQuestion userQuizQuestion = new QuizQuestion();
-            userQuizQuestion.setQuiz(userQuiz);
-            userQuizQuestion.setQuestion(userQuestion);
-            userQuizQuestion.setStatus(ACTIVE);
-            userQuizQuestion.setTimestamp(Instant.now());
-            quizQuestionService.saveQuizQuestion(userQuizQuestion);
+    private void createAndSaveUserCounter(QuizQuestion userQuizQuestion) {
+        Counter userCounter = new Counter();
+        userCounter.setCorrectCount(DEFAULT_CORRECT_COUNT);
+        userCounter.setQuizQuestion(userQuizQuestion);
+        counterService.saveCounter(userCounter);
+    }
 
-            List<Answer> publicAnswers = answerService.findAnswers(publicQuestion.getId());
-            for (Answer publicAnswer : publicAnswers) {
-                Answer userAnswer = new Answer();
-                userAnswer.setText(publicAnswer.getText());
-                userAnswer.setPicture(publicAnswer.getPicture());
-                userAnswer.setQuestion(userQuestion);
-                userAnswer.setIsCorrect(publicAnswer.getIsCorrect());
-                answerService.saveAnswer(userAnswer);
-            }
+    private static QuizQuestion createQuizQuestion(Quiz userQuiz, Question userQuestion) {
+        QuizQuestion userQuizQuestion = new QuizQuestion();
+        userQuizQuestion.setQuiz(userQuiz);
+        userQuizQuestion.setQuestion(userQuestion);
+        userQuizQuestion.setStatus(ACTIVE);
+        userQuizQuestion.setTimestamp(Instant.now());
+        return userQuizQuestion;
+    }
+
+    private QuizQuestion createAndSaveUserQuizQuestion(Quiz userQuiz, Question userQuestion) {
+        QuizQuestion userQuizQuestion = createQuizQuestion(userQuiz, userQuestion);
+        quizQuestionService.saveQuizQuestion(userQuizQuestion);
+        return userQuizQuestion;
+    }
+
+    private void createAndSaveUserAnswers(Question publicQuestion, Question userQuestion) {
+        List<Answer> publicAnswers = answerService.findAnswers(publicQuestion.getId());
+        for (Answer publicAnswer : publicAnswers) {
+            Answer userAnswer = new Answer();
+            userAnswer.setText(publicAnswer.getText());
+            userAnswer.setPicture(publicAnswer.getPicture());
+            userAnswer.setQuestion(userQuestion);
+            userAnswer.setIsCorrect(publicAnswer.getIsCorrect());
+            answerService.saveAnswer(userAnswer);
         }
     }
 
