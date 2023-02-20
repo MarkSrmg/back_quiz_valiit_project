@@ -24,9 +24,10 @@ public interface QuizQuestionMapper {
         }
         while (count > 10) {
             longText.substring(0, 10);
+            return longText + "...";
         }
 
-        return longText + "...";
+        return longText;
     }
 
 }
