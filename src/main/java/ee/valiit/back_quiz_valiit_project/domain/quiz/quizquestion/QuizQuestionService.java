@@ -25,4 +25,8 @@ public class QuizQuestionService {
     public void saveQuizQuestion(QuizQuestion quizQuestion) {
         quizQuestionRepository.save(quizQuestion);
     }
+
+    public void deleteQuestion(QuizQuestion quizQuestion) {
+        quizQuestion.setStatus(Status.DEACTIVATED);
+    }
 }

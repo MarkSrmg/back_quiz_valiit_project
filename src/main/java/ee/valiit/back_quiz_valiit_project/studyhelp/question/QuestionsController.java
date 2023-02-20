@@ -31,4 +31,10 @@ public class QuestionsController {
     public void editQuestion(@RequestParam Integer questionId, @RequestBody QuestionDto questionDto) {
         questionsService.editQuestion(questionId, questionDto);
     }
+    @DeleteMapping("/questions")
+    @Operation(summary = "Deletes question from database", description = "Finds question via Id and changes the status in quiz_question to deactivated")
+    public void deleteQuestion(@RequestParam Integer questionId, @RequestParam Integer quizId) {
+        questionsService.deleteQuestion(questionId, quizId);
+    }
+
 }
