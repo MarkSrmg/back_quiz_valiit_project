@@ -18,7 +18,15 @@ public interface QuizQuestionMapper {
 
     @Named("toShortText")
     static String toShortText(String longText) {
-        return longText.substring(0, 10) + "...";
+        int count = 0;
+        for(int i = 0; i<longText.length(); i++) {
+            count++;
+        }
+        while (count > 10) {
+            longText.substring(0, 10);
+        }
+
+        return longText + "...";
     }
 
 }
