@@ -3,7 +3,6 @@ package ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.question;
 import ee.valiit.back_quiz_valiit_project.studyhelp.dto.QuestionDto;
 
 import ee.valiit.back_quiz_valiit_project.studyhelp.play.QuestionResponse;
-import ee.valiit.back_quiz_valiit_project.studyhelp.question.dto.QuestionShort;
 import ee.valiit.back_quiz_valiit_project.util.PictureUtil;
 import org.mapstruct.*;
 
@@ -23,8 +22,11 @@ public interface QuestionMapper {
     // TODO: 09.02.2023 ByteA to string
     @Mapping(expression = "java(PictureUtil.byteArrayToString(randomQuestion.getPicture()))", target = "questionPicture")
     @Mapping(source = "type", target = "questionType")
-    QuestionResponse toDto(Question randomQuestion);
+    QuestionResponse toResponse(Question randomQuestion);
 
+    @Mapping(source = "text",target = "questionText")
+    @Mapping(expression = "java(PictureUtil.byteArrayToString(question.getPicture()))",target = "questionPicture")
+    QuestionDto toDto(Question question);
 
     @InheritConfiguration(name = "toEntity")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

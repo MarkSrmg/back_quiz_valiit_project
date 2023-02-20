@@ -86,4 +86,9 @@ public class QuestionsService {
         QuizQuestion quizQuestion = quizQuestionService.findQuizQuestion(questionId, quizId);
         quizQuestionService.deleteQuestion(quizQuestion);
     }
+
+    public QuestionDto getQuestion(Integer questionId) {
+        Question question = questionService.findQuestion(questionId);
+        return questionMapper.toDto(question);
+    }
 }

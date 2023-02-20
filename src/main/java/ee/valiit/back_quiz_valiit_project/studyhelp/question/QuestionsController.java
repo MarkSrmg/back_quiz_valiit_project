@@ -20,6 +20,11 @@ public class QuestionsController {
     public List<QuestionShort> getQuestions(@RequestParam Integer quizId) {
         return questionsService.getQuestions(quizId);
     }
+    @GetMapping("/question")
+    @Operation(summary = "Finds question by QuestionId", description = "Gets one single question with questionId")
+    public QuestionDto getQuestion(@RequestParam Integer questionId) {
+        return questionsService.getQuestion(questionId);
+    }
 
     @PostMapping("/questions")
     @Operation(summary = "adds question to database", description = "adds question to question table in database after save button press")

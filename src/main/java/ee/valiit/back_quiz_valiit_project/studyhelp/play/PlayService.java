@@ -42,7 +42,7 @@ public class PlayService {
     public QuestionResponse findPublicQuestion(Integer quizId) {
         List<QuizQuestion> validQuestions = findAllActiveQuizQuestions(quizId);
         QuizQuestion randomQuizQuestion = getRandomQuizQuestion(validQuestions);
-        QuestionResponse questionResponse = questionMapper.toDto(randomQuizQuestion.getQuestion());
+        QuestionResponse questionResponse = questionMapper.toResponse(randomQuizQuestion.getQuestion());
         findAnswers(randomQuizQuestion, questionResponse);
         return questionResponse;
     }
@@ -50,7 +50,7 @@ public class PlayService {
         List<QuizQuestion> validQuestions = findAllActiveQuizQuestions(quizId);
         List<QuizQuestion> validUnasnweredQuizQuestions = findAllUnansweredQuizQuestions(validQuestions);
         QuizQuestion randomQuizQuestion = getRandomQuizQuestion(validUnasnweredQuizQuestions);
-        QuestionResponse questionResponse = questionMapper.toDto(randomQuizQuestion.getQuestion());
+        QuestionResponse questionResponse = questionMapper.toResponse(randomQuizQuestion.getQuestion());
         findAnswers(randomQuizQuestion, questionResponse);
         return questionResponse;
     }
