@@ -17,7 +17,7 @@ import java.util.Optional;
 
 import static ee.valiit.back_quiz_valiit_project.domain.user.role.RoleType.PENDING;
 import static ee.valiit.back_quiz_valiit_project.domain.user.role.RoleType.STUDENT;
-import static ee.valiit.back_quiz_valiit_project.validation.EmailMessage.EMAIL_TO_ADMIN;
+import static ee.valiit.back_quiz_valiit_project.validation.EmailMessage.*;
 
 @Service
 public class SignUpService {
@@ -39,6 +39,7 @@ public class SignUpService {
         if ("teacher".equals(userDto.getUserRole())) {
             role = roleService.findRole(PENDING);
             emailSenderService.sendEmail("noreplymailtestservice@gmail.com", EMAIL_TO_ADMIN.getSubject(), EMAIL_TO_ADMIN.getBody());
+            emailSenderService.sendEmail(newUser.getEmail(), EMAIL_TO_USER_PENDING.getSubject(), EMAIL_TO_USER_PENDING.getBody());
         }else{
             role = roleService.findRole(STUDENT);
         }
@@ -51,5 +52,13 @@ public class SignUpService {
         List<User> users = Validator.getValidUsers(pendingUsers);
         List <PendingResponse> pendingResponse = userMapper.toPendingResponse(users);
         return pendingResponse;
+    }
+
+    public void changeUserStatus(Integer userId) {
+        User user = userService.findUser(userId);
+        Role role = roleService.findRole(RoleType.TEACHER);
+        user.setRole(role);
+        userService.saveUser(user);
+        emailSenderService.sendEmail(user.getEmail(), EMAIL_TO_USER_APPROVED.getSubject(), EMAIL_TO_USER_APPROVED.getBody());
     }
 }
