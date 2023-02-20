@@ -24,4 +24,8 @@ public class UserService {
         Optional<User> user = userRepository.findByUsername(userName);
         return user;
     }
+
+    public void saveUser(User newUser) {
+        userRepository.save(newUser);
+    }
 }

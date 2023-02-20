@@ -1,8 +1,12 @@
 INSERT INTO public.role (id, name) VALUES (DEFAULT, 'student'); --role_id 1
 INSERT INTO public.role (id, name) VALUES (DEFAULT, 'teacher'); --role_id 2
+INSERT INTO public.role (id, name) VALUES (DEFAULT, 'admin'); --role_id 2
+INSERT INTO public.role (id, name) VALUES (DEFAULT, 'pending'); --role_id 2
 
 INSERT INTO public.user (id, role_id, username, password, status) VALUES (DEFAULT, 1, 'student', '123', 'A'); --user_id 1
 INSERT INTO public.user (id, role_id, username, password, status) VALUES (DEFAULT, 2, 'teacher', '123', 'A'); --user_id 2
+INSERT INTO public.user (id, role_id, username, password, status) VALUES (DEFAULT, 3, 'admin', '123', 'A'); --user_id 2
+INSERT INTO public.user (id, role_id, username, password, status) VALUES (DEFAULT, 4, 'pending', '123', 'A'); --user_id 2
 
 INSERT INTO public.quiz (id, user_id, name, status, is_public, required_count, type, timestamp) VALUES (DEFAULT, 1, 'private (student)  Quiz', 'A', false, 2, 'Q', '2023-02-07 14:38:01.000000'); --quiz_id 1
 INSERT INTO public.quiz (id, user_id, name, status, is_public, required_count, type, timestamp) VALUES (DEFAULT, 1, 'private (student)  Flash', 'A', false, 2, 'F', '2023-02-07 14:38:02.000000'); --quiz_id 2

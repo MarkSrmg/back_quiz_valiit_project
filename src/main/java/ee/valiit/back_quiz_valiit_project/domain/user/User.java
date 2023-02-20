@@ -1,5 +1,6 @@
 package ee.valiit.back_quiz_valiit_project.domain.user;
 
+import ee.valiit.back_quiz_valiit_project.domain.user.role.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -36,5 +37,9 @@ public class User {
     @Column(name = "status", nullable = false, length = 1)
     private String status;
 
+
+    @Size(max = 255)
+    @Column(name = "email")
+    private String email;
 
 }
