@@ -16,13 +16,19 @@ public interface AnswerMapper {
     Answer toEntity(AnswerDto answerDto);
 
     @Mapping(source = "id", target = "answerId")
-    @Mapping(source = "text", target = "answerText")
+    @Mapping(source = "text", target = "answerText", qualifiedByName = "noStringToNull")
     @Mapping(expression = "java(PictureUtil.byteArrayToString(answer.getPicture()))", target = "answerPicture")
     @Mapping(constant = "false", target = "isSelected")
     @Mapping(constant = "unanswered", target = "isAnswered")
     @Mapping(source = "isCorrect", target = "isCorrect")
     AnswerResponse toResponse(Answer answer);
 
+    @Named("noStringToNull")
+    static String noStringToNull(String text){
+        if ("".equals(text)) {
+            text=null;
+        }return text;
+    }
 
     List<AnswerResponse> toResponses(List<Answer> answers);
 

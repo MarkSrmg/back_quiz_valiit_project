@@ -1,5 +1,6 @@
 package ee.valiit.back_quiz_valiit_project.studyhelp.signUp;
 
+import ee.valiit.back_quiz_valiit_project.studyhelp.login.LoginResponse;
 import ee.valiit.back_quiz_valiit_project.studyhelp.signUp.dto.PendingResponse;
 import ee.valiit.back_quiz_valiit_project.studyhelp.signUp.dto.UserDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,9 +16,8 @@ public class SignUpController {
 
     @PostMapping("/signup")
     @Operation(summary = "Saves new user", description = "sends email to admin if user is teacher and sends error 888 if user exists")
-    public void signUp (@RequestBody UserDto userDto){
-        signUpService.signUp(userDto);
-
+    public LoginResponse signUp (@RequestBody UserDto userDto){
+        return signUpService.signUp(userDto);
     }
     @GetMapping("/signup")
     @Operation(summary = "finds all pending users", description = "finds all users that are pending if no users found code 889")

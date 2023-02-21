@@ -6,6 +6,7 @@ import ee.valiit.back_quiz_valiit_project.domain.user.UserService;
 import ee.valiit.back_quiz_valiit_project.domain.user.role.Role;
 import ee.valiit.back_quiz_valiit_project.domain.user.role.RoleService;
 import ee.valiit.back_quiz_valiit_project.domain.user.role.RoleType;
+import ee.valiit.back_quiz_valiit_project.studyhelp.login.LoginResponse;
 import ee.valiit.back_quiz_valiit_project.studyhelp.signUp.dto.PendingResponse;
 import ee.valiit.back_quiz_valiit_project.studyhelp.signUp.dto.UserDto;
 import ee.valiit.back_quiz_valiit_project.validation.Validator;
@@ -31,7 +32,7 @@ public class SignUpService {
     private UserMapper userMapper;
 
 
-    public void signUp(UserDto userDto) {
+    public LoginResponse signUp(UserDto userDto) {
         Optional<User> user = userService.findUniqueUsername(userDto.getUserName());
         Validator.getValidUniqueUser(user);
         User newUser = userMapper.toEntity(userDto);
@@ -45,6 +46,7 @@ public class SignUpService {
         }
         newUser.setRole(role);
         userService.saveUser(newUser);
+        return userMapper.toDto(newUser);
     }
 
     public List<PendingResponse> getPendingUser() {
