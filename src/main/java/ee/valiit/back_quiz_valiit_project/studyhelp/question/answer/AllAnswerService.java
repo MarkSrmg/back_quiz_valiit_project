@@ -41,8 +41,8 @@ public class AllAnswerService {
         return answerMapper.toInfos(answers);
     }
 
-    public AnswerDto getAnswer(Integer answerId) {
-        Answer answer = answerService.findAnswer(answerId);
+    public AnswerDto getAnswer(Integer questionId) {
+        Answer answer = answerService.findAnswerByQuestionId(questionId);
         return answerMapper.toDto(answer);
     }
 

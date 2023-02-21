@@ -24,4 +24,9 @@ public class AnswerService {
     public void deleteAnswer(Integer answerId) {
         answerRepository.deleteById(answerId);
     }
+
+    public Answer findAnswerByQuestionId(Integer questionId) {
+        List<Answer> answers = answerRepository.findByQuestion_Id(questionId);
+        return answers.get(0);
+    }
 }

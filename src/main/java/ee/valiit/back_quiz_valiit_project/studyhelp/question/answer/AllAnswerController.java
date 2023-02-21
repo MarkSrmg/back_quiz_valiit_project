@@ -29,9 +29,9 @@ public class AllAnswerController {
        return allAnswerService.getAnswers(questionId);
     }
     @GetMapping("/answer")
-    @Operation(summary = "Gets answer from database", description = "find answer with answerId")
-    public AnswerDto getAnswer (@RequestParam Integer answerId) {
-        return allAnswerService.getAnswer(answerId);
+    @Operation(summary = "Gets answer from database", description = "Finds answer with questionId (used solely for flashcard)")
+    public AnswerDto getAnswer (@RequestParam Integer questionId) {
+        return allAnswerService.getAnswer(questionId);
     }
     @DeleteMapping("/answer")
     @Operation(summary = "Deletes answer from database", description = "find answer with answerId and deletes it")
