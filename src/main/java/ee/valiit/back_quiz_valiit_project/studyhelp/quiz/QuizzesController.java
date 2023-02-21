@@ -22,6 +22,11 @@ public class QuizzesController {
     public QuizResponse addNewQuiz(@RequestParam Integer userId, @RequestBody QuizRequest quizRequest) {
         return quizzesService.addNewQuiz(userId, quizRequest);
     }
+    @PutMapping("/public")
+    @Operation(summary = "Enables teacher to make public quiz", description = "Changes is_Public to true in 'quiz' table")
+    public void setPublicIsTrue(@RequestParam Integer quizId) {
+        quizzesService.setPublicIsTrue(quizId);
+    }
 
     @PutMapping()
     @Operation(summary = "Reset a counter value to zero upon refresh ", description = "Finds all questions by quiz ID and resets their counters to zero in 'counter' table")

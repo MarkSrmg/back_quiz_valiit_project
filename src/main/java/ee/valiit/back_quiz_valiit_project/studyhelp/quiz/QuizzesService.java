@@ -175,4 +175,9 @@ public class QuizzesService {
         }
     }
 
+    public void setPublicIsTrue(Integer quizId) {
+        Quiz quiz = quizService.findQuiz(quizId);
+        quiz.setIsPublic(true);
+        quizService.saveQuiz(quiz);
+    }
 }
