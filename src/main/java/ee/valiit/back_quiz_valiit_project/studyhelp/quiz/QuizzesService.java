@@ -10,7 +10,6 @@ import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.answer.Answer
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.counter.Counter;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.counter.CounterService;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.question.Question;
-import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.question.QuestionRepository;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.question.QuestionService;
 import ee.valiit.back_quiz_valiit_project.domain.user.User;
 import ee.valiit.back_quiz_valiit_project.domain.user.UserService;
@@ -48,13 +47,6 @@ public class QuizzesService {
     private QuestionService questionService;
     @Resource
     private AnswerService answerService;
-    private final QuestionRepository questionRepository;
-
-
-    public QuizzesService(QuestionRepository questionRepository) {
-        this.questionRepository = questionRepository;
-    }
-
 
     public QuizResponse addNewQuiz(Integer userId, QuizRequest quizRequest) {
         User user = userService.findUser(userId);
