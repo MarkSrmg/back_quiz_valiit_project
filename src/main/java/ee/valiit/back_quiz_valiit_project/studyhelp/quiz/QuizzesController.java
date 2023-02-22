@@ -47,10 +47,10 @@ public class QuizzesController {
         return quizzesService.getUserQuizzes(userId);
     }
 
-    @GetMapping("/public/last-5")
-    @Operation(summary = "Finds last 5 public quizzes", description = "Finds last 5 active public quizzes in quiz table")
-    public List<QuizDto> getPublicLast5Quizzes() {
-        return quizzesService.getPublicLast5Quizzes();
+    @GetMapping("/public/random-5")
+    @Operation(summary = "Finds random 5 public quizzes", description = "Finds random 5 active public quizzes in quiz table")
+    public List<QuizDto> getPublicRandom5Quizzes() {
+        return quizzesService.getPublicRandom5Quizzes();
     }
 
     @GetMapping("/public")

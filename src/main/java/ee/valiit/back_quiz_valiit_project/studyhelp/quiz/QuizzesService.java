@@ -23,7 +23,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static ee.valiit.back_quiz_valiit_project.studyhelp.Status.ACTIVE;
 import static ee.valiit.back_quiz_valiit_project.studyhelp.Status.DEACTIVATED;
@@ -72,9 +74,15 @@ public class QuizzesService {
         return quizMapper.toDtos(quizzes);
     }
 
-    public List<QuizDto> getPublicLast5Quizzes() {
-        List<Quiz> quizzes = quizService.getPublicLast5Quizzes();
-        return quizMapper.toDtos(quizzes);
+    public List<QuizDto> getPublicRandom5Quizzes() {
+        List<Quiz> quizzes = quizService.getPublicQuizzes();
+        List<Quiz> randomQuizzes = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            Quiz quiz = quizzes.get(new Random().nextInt(quizzes.size()));
+            randomQuizzes.add(quiz);
+            quizzes.remove(quiz);
+        }
+        return quizMapper.toDtos(randomQuizzes);
     }
 
     public List<QuizDto> getPublicQuizzes() {

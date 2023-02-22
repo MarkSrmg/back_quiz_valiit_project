@@ -29,9 +29,6 @@ public class QuizService {
         return quizRepository.findUserQuizzes(userId, ACTIVE);
     }
 
-    public List<Quiz> getPublicLast5Quizzes() {
-        return quizRepository.findPublicQuizzesLast5(ACTIVE, true);
-    }
     public List<Quiz> getPublicQuizzes() {
         return quizRepository.findPublicQuizzes(ACTIVE, true);
     }
