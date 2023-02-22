@@ -1,6 +1,7 @@
 package ee.valiit.back_quiz_valiit_project.studyhelp.question;
 
 import ee.valiit.back_quiz_valiit_project.domain.quiz.Quiz;
+import ee.valiit.back_quiz_valiit_project.domain.quiz.QuizMapper;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.QuizService;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.*;
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.counter.Counter;
@@ -10,6 +11,7 @@ import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.question.Ques
 import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.question.QuestionService;
 import ee.valiit.back_quiz_valiit_project.studyhelp.Status;
 import ee.valiit.back_quiz_valiit_project.studyhelp.dto.QuestionDto;
+import ee.valiit.back_quiz_valiit_project.studyhelp.question.dto.EditQuizResponse;
 import ee.valiit.back_quiz_valiit_project.studyhelp.question.dto.QuestionResponse;
 import ee.valiit.back_quiz_valiit_project.studyhelp.question.dto.QuestionShort;
 import jakarta.annotation.Resource;
@@ -30,6 +32,8 @@ public class QuestionsService {
     private QuestionService questionService;
     @Resource
     private QuizQuestionService quizQuestionService;
+    @Resource
+    private QuizMapper quizMapper;
     @Resource
     private QuizService quizService;
     @Resource
@@ -67,11 +71,14 @@ public class QuestionsService {
         questionService.saveQuestion(question);
     }
 
-    public List<QuestionShort> getQuestions(Integer quizId) {
-        List<QuizQuestion> quizQuestions = quizQuestionService.findAllActiveQuizQuestions(quizId, ACTIVE);
+    public EditQuizResponse getQuestions(Integer quizId) {
+        Quiz quiz = quizService.findQuiz(quizId);
+        EditQuizResponse editQuizResponse = quizMapper.toEditQuestionResponse(quiz);
+        List<QuizQuestion> quizQuestions = quizQuestionService.findAllActiveQuizQuestions(quiz.getId(), ACTIVE);
         List<QuestionShort> questionShorts = quizQuestionMapper.toQuestionShorts(quizQuestions);
         addQuestionNumber(questionShorts);
-        return questionShorts;
+        editQuizResponse.setQuestionShort(questionShorts);
+        return editQuizResponse;
     }
 
     private static void addQuestionNumber(List<QuestionShort> questionShorts) {

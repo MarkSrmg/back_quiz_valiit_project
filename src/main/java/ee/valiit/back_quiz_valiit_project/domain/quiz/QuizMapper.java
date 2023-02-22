@@ -1,6 +1,7 @@
 package ee.valiit.back_quiz_valiit_project.domain.quiz;
 
 import ee.valiit.back_quiz_valiit_project.studyhelp.dto.QuizRequest;
+import ee.valiit.back_quiz_valiit_project.studyhelp.question.dto.EditQuizResponse;
 import ee.valiit.back_quiz_valiit_project.studyhelp.quiz.dto.QuizDto;
 import org.mapstruct.*;
 
@@ -28,6 +29,7 @@ public interface QuizMapper {
 
     List<QuizDto> toDtos(List<Quiz> quizzes);
 
-
+    @Mapping(source = "name", target = "quizName")
+    EditQuizResponse toEditQuestionResponse(Quiz quiz);
 
 }

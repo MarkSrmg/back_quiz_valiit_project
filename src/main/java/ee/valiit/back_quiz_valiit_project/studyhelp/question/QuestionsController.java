@@ -1,6 +1,7 @@
 package ee.valiit.back_quiz_valiit_project.studyhelp.question;
 
 import ee.valiit.back_quiz_valiit_project.studyhelp.dto.QuestionDto;
+import ee.valiit.back_quiz_valiit_project.studyhelp.question.dto.EditQuizResponse;
 import ee.valiit.back_quiz_valiit_project.studyhelp.question.dto.QuestionResponse;
 import ee.valiit.back_quiz_valiit_project.studyhelp.question.dto.QuestionShort;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,7 +18,7 @@ public class QuestionsController {
 
     @GetMapping("/questions")
     @Operation(summary = "Finds all questions by QuizId and enables to edit them", description = "x")
-    public List<QuestionShort> getQuestions(@RequestParam Integer quizId) {
+    public EditQuizResponse getQuestions(@RequestParam Integer quizId) {
         return questionsService.getQuestions(quizId);
     }
     @GetMapping("/question")

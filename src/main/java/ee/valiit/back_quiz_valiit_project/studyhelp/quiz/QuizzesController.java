@@ -1,6 +1,7 @@
 package ee.valiit.back_quiz_valiit_project.studyhelp.quiz;
 
 import ee.valiit.back_quiz_valiit_project.studyhelp.dto.QuizRequest;
+import ee.valiit.back_quiz_valiit_project.studyhelp.quiz.dto.EditQuiz;
 import ee.valiit.back_quiz_valiit_project.studyhelp.quiz.dto.QuizDto;
 import ee.valiit.back_quiz_valiit_project.studyhelp.quiz.dto.QuizResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,10 +23,10 @@ public class QuizzesController {
     public QuizResponse addNewQuiz(@RequestParam Integer userId, @RequestBody QuizRequest quizRequest) {
         return quizzesService.addNewQuiz(userId, quizRequest);
     }
-    @PutMapping("/public")
-    @Operation(summary = "Enables teacher to make public quiz", description = "Changes is_Public to true in 'quiz' table")
-    public void setPublicIsTrue(@RequestParam Integer quizId) {
-        quizzesService.setPublicIsTrue(quizId);
+    @PutMapping("/edit")
+    @Operation(summary = "Saves changes to quiz", description = "correct count name and public are changed")
+    public void editQuiz(@RequestBody EditQuiz editQuiz, @RequestParam Integer quizId) {
+        quizzesService.editQuiz(quizId, editQuiz);
     }
 
     @PutMapping()

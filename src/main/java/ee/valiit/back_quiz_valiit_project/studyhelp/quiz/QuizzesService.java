@@ -15,6 +15,7 @@ import ee.valiit.back_quiz_valiit_project.domain.quiz.quizquestion.question.Ques
 import ee.valiit.back_quiz_valiit_project.domain.user.User;
 import ee.valiit.back_quiz_valiit_project.domain.user.UserService;
 import ee.valiit.back_quiz_valiit_project.studyhelp.dto.QuizRequest;
+import ee.valiit.back_quiz_valiit_project.studyhelp.quiz.dto.EditQuiz;
 import ee.valiit.back_quiz_valiit_project.studyhelp.quiz.dto.QuizDto;
 import ee.valiit.back_quiz_valiit_project.studyhelp.quiz.dto.QuizResponse;
 import jakarta.annotation.Resource;
@@ -175,9 +176,11 @@ public class QuizzesService {
         }
     }
 
-    public void setPublicIsTrue(Integer quizId) {
+    public void editQuiz(Integer quizId, EditQuiz editQuiz) {
         Quiz quiz = quizService.findQuiz(quizId);
-        quiz.setIsPublic(true);
+        quiz.setName(editQuiz.getQuizName());
+        quiz.setIsPublic(editQuiz.getIsPublic());
+        quiz.setRequiredCount(editQuiz.getRequiredCount());
         quizService.saveQuiz(quiz);
     }
 }
