@@ -70,6 +70,9 @@ public class QuizzesService {
         List<Quiz> quizzes = quizService.getPublicQuizzes();
         List<Quiz> randomQuizzes = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
+            if (quizzes.isEmpty()) {
+                break;
+            }
             Quiz quiz = quizzes.get(new Random().nextInt(quizzes.size()));
             randomQuizzes.add(quiz);
             quizzes.remove(quiz);
