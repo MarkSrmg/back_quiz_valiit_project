@@ -22,9 +22,8 @@ public interface QuizQuestionMapper {
         for(int i = 0; i<longText.length(); i++) {
             count++;
         }
-        while (count > 10) {
-            longText.substring(0, 10);
-            return longText + "...";
+        if (count > 20) {
+            return longText.substring(0, 20) + "...";
         }
 
         return longText;
