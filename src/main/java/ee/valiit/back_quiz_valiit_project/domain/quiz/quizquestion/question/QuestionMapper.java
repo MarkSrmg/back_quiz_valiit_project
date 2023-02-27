@@ -16,10 +16,8 @@ public interface QuestionMapper {
     @Mapping(source = "questionType", target = "type")
     Question toEntity(QuestionDto questionDto);
 
-
     @Mapping(source = "id", target = "questionId")
     @Mapping(source = "text", target = "questionText")
-    // TODO: 09.02.2023 ByteA to string
     @Mapping(expression = "java(PictureUtil.byteArrayToString(randomQuestion.getPicture()))", target = "questionPicture")
     @Mapping(source = "type", target = "questionType")
     QuestionResponse toResponse(Question randomQuestion);
@@ -31,11 +29,6 @@ public interface QuestionMapper {
     @InheritConfiguration(name = "toEntity")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     Question updateQuestion(QuestionDto questionDto, @MappingTarget Question question);
-
-
-
-
-
 
     @Named("stringToByteArray")
     static byte[] stringToByteArray(String picture) {

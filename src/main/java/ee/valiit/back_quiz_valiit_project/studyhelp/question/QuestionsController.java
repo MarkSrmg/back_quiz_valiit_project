@@ -26,7 +26,6 @@ public class QuestionsController {
     public QuestionDto getQuestion(@RequestParam Integer questionId) {
         return questionsService.getQuestion(questionId);
     }
-
     @PostMapping("/questions")
     @Operation(summary = "adds question to database", description = "adds question to question table in database after save button press")
     public QuestionResponse addQuestion(@RequestParam Integer quizId, @RequestBody QuestionDto questionDto) {

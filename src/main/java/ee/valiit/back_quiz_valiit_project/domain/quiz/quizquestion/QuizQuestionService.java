@@ -17,20 +17,16 @@ public class QuizQuestionService {
     public List<QuizQuestion> findAllActiveQuizQuestions(Integer quizId, String status) {
         return quizQuestionRepository.findAllActiveQuizQuestions(quizId, status);
     }
-
     public QuizQuestion findQuizQuestion(Integer quizId, Integer questionId) {
         return quizQuestionRepository.findQuizQuestion(quizId, questionId).get();
     }
-
     public void saveQuizQuestion(QuizQuestion quizQuestion) {
         quizQuestionRepository.save(quizQuestion);
     }
-
     public void deleteQuestion(QuizQuestion quizQuestion) {
         quizQuestion.setStatus(Status.DEACTIVATED);
         quizQuestionRepository.save(quizQuestion);
     }
-
     public QuizQuestion findQuizQuestion(Integer questionId) {
         return quizQuestionRepository.findByQuestion_Id(questionId);
     }

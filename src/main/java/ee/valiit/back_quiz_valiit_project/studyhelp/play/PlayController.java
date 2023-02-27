@@ -33,11 +33,9 @@ public class PlayController {
     public QuestionResponse findPublicQuestion(@RequestParam Integer quizId) {
         return playService.findQuestion(quizId);
     }
-
     @PutMapping("/play")
     @Operation(summary = "increases Correct Question Count")
     public void increaseQuestionCorrectCount(@RequestParam Integer quizId, @RequestParam Integer questionId) {
         playService.increaseQuestionCorrectCount(quizId, questionId);
     }
-
 }
