@@ -39,8 +39,8 @@ public class SignUpService {
         Role role = new Role();
         if ("teacher".equals(userDto.getUserRole())) {
             role = roleService.findRole(PENDING);
-            emailSenderService.sendEmail("noreplymailtestservice@gmail.com", EMAIL_TO_ADMIN.getSubject(), EMAIL_TO_ADMIN.getBody());
-            emailSenderService.sendEmail(newUser.getEmail(), EMAIL_TO_USER_PENDING.getSubject(), EMAIL_TO_USER_PENDING.getBody());
+           // emailSenderService.sendEmail("noreplymailtestservice@gmail.com", EMAIL_TO_ADMIN.getSubject(), EMAIL_TO_ADMIN.getBody());
+           // emailSenderService.sendEmail(newUser.getEmail(), EMAIL_TO_USER_PENDING.getSubject(), EMAIL_TO_USER_PENDING.getBody());
         }else{
             role = roleService.findRole(STUDENT);
         }
@@ -61,6 +61,6 @@ public class SignUpService {
         Role role = roleService.findRole(RoleType.TEACHER);
         user.setRole(role);
         userService.saveUser(user);
-        emailSenderService.sendEmail(user.getEmail(), EMAIL_TO_USER_APPROVED.getSubject(), EMAIL_TO_USER_APPROVED.getBody());
+//        emailSenderService.sendEmail(user.getEmail(), EMAIL_TO_USER_APPROVED.getSubject(), EMAIL_TO_USER_APPROVED.getBody());
     }
 }
